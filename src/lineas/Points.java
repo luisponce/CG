@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package lineas;
 
@@ -21,8 +17,8 @@ import java.util.Random;
 
 public class Points extends JPanel {
     
-    private int cW;
-    private int cH;
+    private int cW;//centro de la pantalla en x
+    private int cH;//centro de la pantalla en y
     
 
     public void plotLine(int xi, int yi, int xf, int yf, Graphics g){
@@ -45,7 +41,7 @@ public class Points extends JPanel {
                       y += 1;
                    }
                 }
-            } else {//Octante II
+            } else {//Octante II 
                 int incE = 2 * dx;
                 int incNE = 2 * dx - 2 * dy;
                 int d = 2 * dx - dy;
@@ -79,6 +75,17 @@ public class Points extends JPanel {
                 
             }
         } else if (dx<0 && dy<0){//cuadrante III
+            int tmp = xf;
+            xf = xi;
+            xi = tmp;
+            
+            tmp = yf;
+            yf = yi;
+            yi = tmp;
+                    
+            dy = yf - yi;
+            dx = xf - xi;
+            
             if(Math.abs(dx)>Math.abs(dy)){//octante V
                 int incE = 2 * dy;
                 int incNE = 2 * dy - 2 * dx;
@@ -127,26 +134,26 @@ public class Points extends JPanel {
    * Es necesario hacerle un cast a Graphics2D para trabajar en Java2D.
    */
     @Override
-  public void paintComponent(Graphics g) {
-      super.paintComponent(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-      Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
-      g2d.setColor(Color.RED);
+        g2d.setColor(Color.RED);
 
-      // size es el tamaño de la ventana.
-      Dimension size = getSize();
-      // Insets son los bordes y los títulos de la ventana.
-      Insets insets = getInsets();
+        // size es el tamaño de la ventana.
+        Dimension size = getSize();
+        // Insets son los bordes y los títulos de la ventana.
+        Insets insets = getInsets();
 
-      int w =  size.width - insets.left - insets.right;
-      int h =  size.height - insets.top - insets.bottom;
+        int w =  size.width - insets.left - insets.right;
+        int h =  size.height - insets.top - insets.bottom;
 
       
-      //encontrar el centro
-      cW = w/2;
-      cH = h/2;
-      g2d.drawLine(cW, cH, cW, cH);
+        //encontrar el centro
+        cW = w/2;
+        cH = h/2;
+        g2d.drawLine(cW, cH, cW, cH);
       
         //eje x
         for (int i = (cW - cW/4); i < cW + cW/4; i++) {
@@ -171,10 +178,10 @@ public class Points extends JPanel {
         plotLine(0,0,10,60, g);
         
         //<0,0> -> <-60,-10>
-        plotLine(-60,-10,0,0, g);
+        plotLine(0,0,-60,-10, g);
         
         //<0,0> -> <-10,-60>
-        plotLine(-10,-60,0,0, g);
+        plotLine(0,0,-10,-60, g);
         
         //<0,0> -> <-60,10>
         plotLine(0,0,-60,10, g);
