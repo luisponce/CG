@@ -57,7 +57,11 @@ public class Points extends JPanel {
                 }
             }
         } else if (dx<0 && dy>0){//cuadrante II
-            if(Math.abs(dx)>Math.abs(dy)){//octante IV
+            dx = -dx;
+            
+            
+            if(Math.abs(dx)>Math.abs(dy)){//octante IV   
+                
                 int incE = 2 * dy;
                 int incNE = 2 * dy - 2 * dx;
                 int d = 2 * dy - dx;
@@ -72,7 +76,19 @@ public class Points extends JPanel {
                    }
                 }
             } else {//octante III
-                
+                int incE = 2 * dx;
+                int incNE = 2 * dx - 2 * dy;
+                int d = 2 * dx - dy;
+                int x = xi;  
+                for (int y = yi; y <= yf; y++) {
+                   g.drawLine(cW+x, cH-y, cW+x, cH-y);
+                   if (d <= 0) {
+                      d += incE;
+                   } else {
+                      d += incNE;
+                      x -= 1;
+                   }
+                }
             }
         } else if (dx<0 && dy<0){//cuadrante III
             int tmp = xf;
@@ -116,9 +132,46 @@ public class Points extends JPanel {
                 }
             }
         } else {//cuadrante IV
-            if(Math.abs(dx)>Math.abs(dy)){//octante VIII
+            int tmp = xf;
+            xf = xi;
+            xi = tmp;
             
+            tmp = yf;
+            yf = yi;
+            yi = tmp;
+                    
+            dy = yf - yi;
+            dx = xf - xi;
+            
+            dx = -dx;
+            if(Math.abs(dx)>Math.abs(dy)){//octante VIII
+                int incE = 2 * dy;
+                int incNE = 2 * dy - 2 * dx;
+                int d = 2 * dy - dx;
+                int y = yi;  
+                for (int x = xi; x > xf; x--) {
+                   g.drawLine(cW+x, cH-y, cW+x, cH-y);
+                   if (d <= 0) {
+                      d += incE;
+                   } else {
+                      d += incNE;
+                      y += 1;
+                   }
+                }
             } else {//octante VII
+                int incE = 2 * dx;
+                int incNE = 2 * dx - 2 * dy;
+                int d = 2 * dx - dy;
+                int x = xi;  
+                for (int y = yi; y <= yf; y++) {
+                   g.drawLine(cW+x, cH-y, cW+x, cH-y);
+                   if (d <= 0) {
+                      d += incE;
+                   } else {
+                      d += incNE;
+                      x -= 1;
+                   }
+                }
                 
             }
         }
@@ -185,6 +238,15 @@ public class Points extends JPanel {
         
         //<0,0> -> <-60,10>
         plotLine(0,0,-60,10, g);
+        
+        //<0,0> -> <-10,60>
+        plotLine(0, 0, -10, 60, g);
+        
+        //<0,0> -> <60,-10>
+        plotLine(0, 0, 60, -10, g);
+        
+        //<0,0> -> <10, -60>
+        plotLine(0, 0, 10, -60, g);
         
 //      // Generador de números Random
 //      // Se va a utilizar nextInt, que devuelve un entero.
