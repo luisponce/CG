@@ -209,44 +209,54 @@ public class Points extends JPanel {
         g2d.drawLine(cW, cH, cW, cH);
       
         //eje x
-        for (int i = (cW - cW/4); i < cW + cW/4; i++) {
+        for (int i = (cW - cW/2); i < cW + cW/2; i++) {
             g2d.drawLine(i, cH, i, cH);
         }
       
         g2d.setColor(Color.GREEN);
         //eje y
-        for (int i = (cH - cH/4); i < cH + cH/4; i++) {
+        for (int i = (cH - cH/2); i < cH + cH/2; i++) {
             g2d.drawLine(cW, i, cW, i);
         }
         
         //Rayos--------------------------------------------------------------
+        //las coordenadas son dadas en porcentajes de la pantalla
         g2d.setColor(Color.blue);
-        //<0,0> -> <60,50>
-        plotLine(0,0,60,50, g);
+        //<0,0> -> <71,71>
+        plotLine(0,0, w * 12/100, h * 12/100, g);
         
-        //<0,0> -> <50,50>
-        plotLine(0,0,50,50, g);
+        //<0,0> -> <-71,-71>
+        plotLine(0,0, -w * 12/100 , -h * 12/100, g);
         
-        //<0,0> -> <10,60>
-        plotLine(0,0,10,60, g);
+        //<0,0> -> <89, 41>
+        plotLine(0,0, w * 15/100, h * 7/100, g);
         
-        //<0,0> -> <-60,-10>
-        plotLine(0,0,-60,-10, g);
+        //<0,0> -> <-89, -44>
+        plotLine(0,0, -w * 15/100, -h * 7/100, g);
         
-        //<0,0> -> <-10,-60>
-        plotLine(0,0,-10,-60, g);
+        //<0,0> -> <44,89>
+        plotLine(0,0, w * 7/100, h * 15/100, g);
         
-        //<0,0> -> <-60,10>
-        plotLine(0,0,-60,10, g);
+        //<0,0> -> <-44, -89>
+        plotLine(0,0, -w * 7/100, -h * 15/100, g);
         
-        //<0,0> -> <-10,60>
-        plotLine(0, 0, -10, 60, g);
+        //<0,0> -> <-71,71>
+        plotLine(0, 0, -w * 12/100, h * 12/100, g);
         
-        //<0,0> -> <60,-10>
-        plotLine(0, 0, 60, -10, g);
+        //<0,0> -> <71,-71>
+        plotLine(0, 0, w * 12/100, -h * 12/100, g);
         
-        //<0,0> -> <10, -60>
-        plotLine(0, 0, 10, -60, g);
+        //<0,0> -> <-89, 44>
+        plotLine(0, 0, -w * 15/100, h * 7/100, g);
+        
+        //<0,0> -> <89,-44>
+        plotLine(0, 0, w * 15/100, -h * 7/100, g);
+        
+        //<0,0> -> <-44, 89>
+        plotLine(0, 0, -w * 7/100, h * 15/100, g);
+        
+        //<0,0> -> <44, -89>
+        plotLine(0, 0, w * 7/100, -h * 15/100, g);
         
 //      // Generador de números Random
 //      // Se va a utilizar nextInt, que devuelve un entero.
