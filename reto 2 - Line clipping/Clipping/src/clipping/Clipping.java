@@ -30,7 +30,8 @@ public class Clipping extends JPanel{
     
     //200 lineas con x1, y1, x2, y2
     int[][] coords = new int[200][4];
-    
+    //coordenadas de los vertices del rectangulo
+    int []vertices = new int[4];
     
     public void fillWithRandom(){
         for (int[] coord : coords) {
@@ -40,13 +41,26 @@ public class Clipping extends JPanel{
                   
                   if (j%2==0) {
                       //si es x
-                      coord[j] = (int) (rng*500);
+                      coord[j] = (int) (rng*screenW);
                   } else {
                       //si es y
-                      coord[j] = (int) (rng*500);
+                      coord[j] = (int) (rng*screenH);
                   }
               }
           }
+    }
+    
+    public void createRectangle(){
+        
+        //vertices[0][0] = (int) (Math.random() * screenW);
+           for (int j = 0; j < vertices.length; j++){
+               if(j%2 == 0){
+                   vertices[j] = (int) (Math.random() * screenW);
+               }else{
+                   vertices[j] = (int) (Math.random() * screenH);
+               }
+           } 
+         
     }
     
     @Override
@@ -69,7 +83,7 @@ public class Clipping extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
         
         g2d.setColor(Color.blue);
-        
+        fillWithRandom();
         for(int[] coord : coords){
             int x1, x2, y1, y2;
             
@@ -80,6 +94,20 @@ public class Clipping extends JPanel{
             System.out.println(x1+", "+y1+" - "+x2+", "+y2);
             g2d.drawLine(x+x1, y-y1, x+x2, y-y2);
         }
+        g2d.setColor(Color.orange);
+        createRectangle();
+        int x1, y1, x2, y2;
+        x1 = vertices[0];
+        x2 = vertices[2];
+        y1 = vertices[1];
+        y2 = vertices[3];
+        
+        //trazar el rectangulo
+        
+        g2d.drawLine(x1, y1, x2, y1);
+        g2d.drawLine(x1, y1, x1, y2);
+        g2d.drawLine(x2, y1, x2, y2);
+        g2d.drawLine(x1, y2, x2, y2);
     }
 
     
@@ -106,7 +134,7 @@ public class Clipping extends JPanel{
       frame.setLocationRelativeTo(null);
       // Mostrar el frame
       frame.setVisible(true);
-      c.fillWithRandom();
+      //c.fillWithRandom();
       //no se puede cambiar el tamaño
       frame.setResizable(false);
     }
