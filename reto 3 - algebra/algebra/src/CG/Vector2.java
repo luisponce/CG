@@ -74,6 +74,31 @@ public class Vector2 {
     }
     
     //STATIC stuff-------------------------
+    public static Vector2 add(Vector2 v1, Vector2 v2){
+        Vector2 res = new Vector2(null, null);
+        res.setX(v1.getX() + v2.getX());
+        res.setY(v1.getY() + v2.getY());
+        return res;
+    }
     
+    public static Vector2 sub(Vector2 v1, Vector2 v2){
+        Vector2 res = new Vector2(null, null);
+        res.setX(v1.getX() - v2.getX());
+        res.setY(v1.getY() - v2.getY());
+        return res;
+    }
     
+    public static double dot(Vector2 v1, Vector2 v2){
+        double x = (v1.getX() * v2.getX());
+        double y = (v1.getY() + v2.getY());
+        return x+y;
+    }
+    
+    //El resultado da en 3D, se implementa cuando este
+    //Vector3
+    
+    //public static Vector2 cross(Vector2 v1, Vector2 v2){
+    //    Vector2 res = new Vector2(null, null);
+    //    
+    //}
 }
