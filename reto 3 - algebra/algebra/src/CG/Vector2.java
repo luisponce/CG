@@ -90,7 +90,7 @@ public class Vector2 {
     
     public static double dot(Vector2 v1, Vector2 v2){
         double x = (v1.getX() * v2.getX());
-        double y = (v1.getY() + v2.getY());
+        double y = (v1.getY() * v2.getY());
         return x+y;
     }
     
