@@ -94,11 +94,12 @@ public class Vector2 {
         return x+y;
     }
     
-    //El resultado da en 3D, se implementa cuando este
-    //Vector3
-    
-    //public static Vector2 cross(Vector2 v1, Vector2 v2){
-    //    Vector2 res = new Vector2(null, null);
-    //    
-    //}
+    public static Vector3 cross(Vector2 v1, Vector2 v2){
+        Vector3 aux1 = new Vector3(v1.getX(), v1.getY(), 0);
+        Vector3 aux2 = new Vector3(v2.getX(), v2.getY(), 0);
+        
+        Vector3 res = Vector3.cross(aux1, aux2);
+        
+        return res;
+    }
 }
