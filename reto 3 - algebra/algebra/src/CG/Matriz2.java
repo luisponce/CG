@@ -71,7 +71,7 @@ public class Matriz2 {
     
     @Override
     public String toString(){
-        String str = "M2: \n";
+        String str = "";
         for (double[] fila : matrix) {
             for (double num : fila) {
                 str+= num + " ";
@@ -80,5 +80,20 @@ public class Matriz2 {
         }
         
         return str;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("pruebas de matriz2:");
+        
+        double[][] md1 = {{1,2,1}, {0,3,2}, {1,1,1}};
+        Matriz2 m1 = new Matriz2(md1);
+        System.out.println("M1 = \n"+m1.toString());
+        
+        double[][] md2 = {{2,3,1}, {1,0,1}, {1,1,2}};
+        Matriz2 m2 = new Matriz2(md2);
+        System.out.println("M2 = \n"+m2.toString());
+        
+        Matriz2 mul = Matriz2.times(m1, m2);
+        System.out.println("M1*M2 = \n"+mul.toString());
     }
 }

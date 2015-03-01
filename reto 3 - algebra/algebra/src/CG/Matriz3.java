@@ -75,4 +75,19 @@ public class Matriz3 {
         
         return str;
     }
+    
+    public static void main(String[] args) {
+        System.out.println("pruebas de matriz3:");
+        
+        double[][] md1 = {{1,2,1,2}, {0,3,2,1}, {1,1,1,1}, {1,2,3,4}};
+        Matriz3 m1 = new Matriz3(md1);
+        System.out.println("M1 = \n"+m1.toString());
+        
+        double[][] md2 = {{2,3,1,0}, {1,0,1,0}, {1,1,2,2}, {4,1,3,2}};
+        Matriz3 m2 = new Matriz3(md2);
+        System.out.println("M2 = \n"+m2.toString());
+        
+        Matriz3 mul = Matriz3.times(m1, m2);
+        System.out.println("M1*M2 = \n"+mul.toString());
+    }
 }
