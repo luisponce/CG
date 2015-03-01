@@ -67,7 +67,7 @@ public class Vector2 {
     @Override
     public String toString(){
         String str = "<";
-        str += getX() + ",";
+        str += getX() + ", ";
         str += getY() + ">";
         
         return str;
@@ -100,5 +100,27 @@ public class Vector2 {
         Vector3 res = Vector3.cross(aux1, aux2);
         
         return res;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("pruebas de Vector2:");
+        
+        Vector2 v1 = new Vector2(10, 15.5);
+        System.out.println("V1 = " + v1.toString());
+        
+        Vector2 v2 = new Vector2(5.3, 5);
+        System.out.println("V2 = " + v2.toString());
+        
+        Vector2 suma = Vector2.add(v1, v2);
+        System.out.println("V1+V2 = "+suma.toString());
+        
+        Vector2 resta = Vector2.sub(v1, v2);
+        System.out.println("V1-V2 = "+resta.toString());
+        
+        Vector3 cruz = Vector2.cross(v1, v2);
+        System.out.println("V1xV2 = "+cruz.toString());
+        
+        double punto = Vector2.dot(v1, v2);
+        System.out.println("V1*V2 = "+punto);
     }
 }

@@ -7,7 +7,6 @@ package CG;
 
 /**
  *
- * @author jonathaneidelman
  */
 public class Vector3 {
     double[] comps = new double[4];
@@ -84,8 +83,8 @@ public class Vector3 {
     @Override
     public String toString(){
         String str = "<";
-        str += getX() + ",";
-        str += getY() + ",";
+        str += getX() + ", ";
+        str += getY() + ", ";
         str += getZ() + ">";
         
         return str;
@@ -123,5 +122,29 @@ public class Vector3 {
         res.setZ(v1.getX()*v2.getY() - v1.getY()*v2.getX());
         
         return res;
+    }
+    
+    
+    
+    public static void main(String[] args) {
+        System.out.println("pruebas de Vector3:");
+        
+        Vector3 v1 = new Vector3(1, 2, 1);
+        System.out.println("V1 = " + v1.toString());
+        
+        Vector3 v2 = new Vector3(5, 0, 0.5);
+        System.out.println("V2 = " + v2.toString());
+        
+        Vector3 suma = Vector3.add(v1, v2);
+        System.out.println("V1+V2 = "+suma.toString());
+        
+        Vector3 resta = Vector3.sub(v1, v2);
+        System.out.println("V1-V2 = "+resta.toString());
+        
+        Vector3 cruz = Vector3.cross(v1, v2);
+        System.out.println("V1xV2 = "+cruz.toString());
+        
+        double punto = Vector3.dot(v1, v2);
+        System.out.println("V1*V2 = "+punto);
     }
 }

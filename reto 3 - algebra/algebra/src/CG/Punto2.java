@@ -41,7 +41,7 @@ public class Punto2 {
     @Override
     public String toString(){
         String str = "(";
-        str += getX() + ",";
+        str += getX() + ", ";
         str += getY() + ")";
         
         return str;
@@ -65,5 +65,15 @@ public class Punto2 {
         return new Matriz2(res);
     }
     
-    //TODO: implementar main
+    public static void main(String[] args) {
+        System.out.println("pruebas de punto2:");
+        
+        Punto2 p1 = new Punto2(3, 5);
+        System.out.println("P1 = " + p1.toString());
+        
+        //TODO: test de preTimes
+        
+        
+    }
+    
 }
