@@ -8,13 +8,19 @@ package CG;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author jonathaneidelman
- */
+
 public class Matriz3 {
-        double[][] matrix = new double [4][4];
+    double[][] matrix;
+
+    public Matriz3(double[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    public Matriz3() {
+        matrix = new double [4][4];
+    }
     
+        
     public void setValue(double value, int i, int j){
         matrix[i][j] = value;
     }
@@ -43,7 +49,7 @@ public class Matriz3 {
         }
         return res;
     }
-    public static double[][] times(Matriz3 m1, Matriz3 m2){
+    public static Matriz3 times(Matriz3 m1, Matriz3 m2){
         double[][] res = new double[4][4];
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
@@ -54,24 +60,19 @@ public class Matriz3 {
                 }
             }
         }
-        return res;
+        return new Matriz3(res);
     }
     
-    public static double[][] preTimes(Vector3 v3, Matriz3 m2){
-        double[][] res = new double [1][3];
-        Matriz3 aux = new Matriz3();
-        aux.setValue(v3.getX(), 0, 0);
-        aux.setValue(v3.getY(), 0, 1);
-        aux.setValue(v3.getZ(), 0, 2);
-        aux.setValue(v3.comps[3], 0, 3);
-        for(int i = 0; i < 4; i++){
-            try {
-                res[0][i] = multiplyArrays(aux.getRow(0), m2.getCol(i));
-            } catch (Exception ex) {
-                Logger.getLogger(Matriz2.class.getName()).log(Level.SEVERE, null, ex);
+    @Override
+    public String toString(){
+        String str = "M3: \n";
+        for (double[] fila : matrix) {
+            for (double num : fila) {
+                str+= num + " ";
             }
+            str+="\n";
         }
         
-        return res;
+        return str;
     }
 }

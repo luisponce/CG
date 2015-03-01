@@ -8,15 +8,24 @@ package CG;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author jonathaneidelman
- */
+
 public class Matriz2 {
-    double[][] matrix = new double [3][3];
+    double[][] matrix;
+
+    public Matriz2() {
+        this.matrix = new double[3][3];
+    }
+    
+    public Matriz2(double[][] matrix) {
+        this.matrix = matrix;
+    }    
     
     public void setValue(double value, int i, int j){
         matrix[i][j] = value;
+    }
+    
+    public double getValue(int i, int j){
+        return matrix[i][j];
     }
     
     public double[] getRow(int row) throws Exception{
@@ -36,6 +45,7 @@ public class Matriz2 {
        }
        return res;
     }
+    
     public static double multiplyArrays(double[] a1, double[] a2){
         double res = 0.0;
         for(int i = 0; i < 3; i++){
@@ -43,7 +53,9 @@ public class Matriz2 {
         }
         return res;
     }
-    public static double[][] times(Matriz2 m1, Matriz2 m2){
+    
+    
+    public static Matriz2 times(Matriz2 m1, Matriz2 m2){
         double[][] res = new double[3][3];
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -54,23 +66,19 @@ public class Matriz2 {
                 }
             }
         }
-        return res;
+        return new Matriz2(res);
     }
     
-    public static double[][] preTimes(Vector2 v2, Matriz2 m2){
-        double[][] res = new double [1][3];
-        Matriz2 aux = new Matriz2();
-        aux.setValue(v2.getX(), 0, 0);
-        aux.setValue(v2.getY(), 0, 1);
-        aux.setValue(v2.comps[2], 0, 2);
-        for(int i = 0; i < 3; i++){
-            try {
-                res[0][i] = multiplyArrays(aux.getRow(0), m2.getCol(i));
-            } catch (Exception ex) {
-                Logger.getLogger(Matriz2.class.getName()).log(Level.SEVERE, null, ex);
+    @Override
+    public String toString(){
+        String str = "M2: \n";
+        for (double[] fila : matrix) {
+            for (double num : fila) {
+                str+= num + " ";
             }
+            str+="\n";
         }
         
-        return res;
+        return str;
     }
 }

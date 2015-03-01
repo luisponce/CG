@@ -1,6 +1,10 @@
 
 package CG;
 
+import static CG.Matriz2.multiplyArrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  */
@@ -43,7 +47,23 @@ public class Punto2 {
         return str;
     }
     
-    //TODO: implementar operacion premultiplicar por matriz
+    //operacion premultiplicar por matriz
+    public static Matriz2 preTimes(Vector2 v2, Matriz2 m2){
+        double[][] res = new double [1][3];
+        Matriz2 aux = new Matriz2();
+        aux.setValue(v2.getX(), 0, 0);
+        aux.setValue(v2.getY(), 0, 1);
+        aux.setValue(v2.getComps()[2], 0, 2);
+        for(int i = 0; i < 3; i++){
+            try {
+                res[0][i] = multiplyArrays(aux.getRow(0), m2.getCol(i));
+            } catch (Exception ex) {
+                Logger.getLogger(Matriz2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return new Matriz2(res);
+    }
     
     //TODO: implementar main
 }

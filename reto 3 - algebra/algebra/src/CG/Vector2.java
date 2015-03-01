@@ -6,7 +6,7 @@ package CG;
  *
  */
 public class Vector2 {
-    double[] comps = new double[3];
+    private double[] comps = new double[3];
 
     /**
      * Constructor por dos puntos, inicial y final.
@@ -75,17 +75,15 @@ public class Vector2 {
     
     //STATIC stuff-------------------------
     public static Vector2 add(Vector2 v1, Vector2 v2){
-        Vector2 res = new Vector2(null, null);
-        res.setX(v1.getX() + v2.getX());
-        res.setY(v1.getY() + v2.getY());
-        return res;
+        double x = v1.getX() + v2.getX();
+        double y = v1.getY() + v2.getY();
+        return new Vector2(x, y);
     }
     
     public static Vector2 sub(Vector2 v1, Vector2 v2){
-        Vector2 res = new Vector2(null, null);
-        res.setX(v1.getX() - v2.getX());
-        res.setY(v1.getY() - v2.getY());
-        return res;
+        double x = v1.getX() - v2.getX();
+        double y = v1.getY() - v2.getY();
+        return new Vector2(x, y);
     }
     
     public static double dot(Vector2 v1, Vector2 v2){
@@ -94,6 +92,7 @@ public class Vector2 {
         return x+y;
     }
     
+    //trata el producto cruz como si fuera entre vector3
     public static Vector3 cross(Vector2 v1, Vector2 v2){
         Vector3 aux1 = new Vector3(v1.getX(), v1.getY(), 0);
         Vector3 aux2 = new Vector3(v2.getX(), v2.getY(), 0);
