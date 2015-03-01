@@ -75,10 +75,21 @@ public class Punto3 {
     @Override
     public String toString(){
         String str = "(";
-        str += getX() + ",";
-        str += getY() + ",";
+        str += getX() + ", ";
+        str += getY() + ", ";
         str += getZ() + ")";
         
         return str;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("pruebas de punto2:");
+        
+        Punto3 p1 = new Punto3(4, 4, 1);
+        System.out.println("P1 = " + p1.toString());
+        
+        //TODO: test de preTimes
+        
+        
     }
 }
