@@ -20,7 +20,10 @@ public class Matriz3 {
         matrix = new double [4][4];
     }
     
-        
+    public double getValue(int i, int j){
+        return matrix[i][j];
+    }
+    
     public void setValue(double value, int i, int j){
         matrix[i][j] = value;
     }
@@ -58,6 +61,16 @@ public class Matriz3 {
                 } catch (Exception ex) {
                     Logger.getLogger(Matriz2.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+        return new Matriz3(res);
+    }
+    
+    public static Matriz3 transpose(Matriz3 m){
+        double[][] res = new double[4][4];
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                res[i][j] = m.getValue(j, i);
             }
         }
         return new Matriz3(res);

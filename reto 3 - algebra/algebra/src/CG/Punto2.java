@@ -17,6 +17,10 @@ public class Punto2 {
         
         coords[2] = 1;
     }
+    
+    public Punto2(double[] coords) {
+        this.coords = coords;
+    }
 
     public double[] getCoords() {
         return coords;
@@ -48,21 +52,21 @@ public class Punto2 {
     }
     
     //operacion premultiplicar por matriz
-    public static Matriz2 preTimes(Vector2 v2, Matriz2 m2){
-        double[][] res = new double [1][3];
+    public static Punto2 preTimes(Punto2 p2, Matriz2 m2){
+        double[] res = new double [3];
         Matriz2 aux = new Matriz2();
-        aux.setValue(v2.getX(), 0, 0);
-        aux.setValue(v2.getY(), 0, 1);
-        aux.setValue(v2.getComps()[2], 0, 2);
+        aux.setValue(p2.getX(), 0, 0);
+        aux.setValue(p2.getY(), 0, 1);
+        aux.setValue(p2.getCoords()[2], 0, 2);
         for(int i = 0; i < 3; i++){
             try {
-                res[0][i] = multiplyArrays(aux.getRow(0), m2.getCol(i));
+                res[i] = multiplyArrays(aux.getRow(0), m2.getCol(i));
             } catch (Exception ex) {
                 Logger.getLogger(Matriz2.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
-        return new Matriz2(res);
+        return new Punto2(res);
     }
     
     //TODO: implementar main

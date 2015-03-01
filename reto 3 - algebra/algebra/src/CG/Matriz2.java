@@ -69,6 +69,16 @@ public class Matriz2 {
         return new Matriz2(res);
     }
     
+    public static Matriz2 transpose(Matriz2 m){
+        double[][] res = new double[3][3];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                res[i][j] = m.getValue(j, i);
+            }
+        }
+        return new Matriz2(res);
+    }
+    
     @Override
     public String toString(){
         String str = "M2: \n";
