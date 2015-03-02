@@ -75,8 +75,13 @@ public class Punto2 {
         Punto2 p1 = new Punto2(3, 5);
         System.out.println("P1 = " + p1.toString());
         
-        //TODO: test de preTimes
+        //test de preTimes
+        double[][] md1 = {{1,2,1}, {0,3,2}, {1,1,1}};
+        Matriz2 m1 = new Matriz2(md1);
+        System.out.println("M1 = \n"+m1.toString());
         
+        Punto2 pre = Punto2.preTimes(p1, m1);
+        System.out.println("P1*M1 = "+pre.toString());
         
     }
     

@@ -83,13 +83,18 @@ public class Punto3 {
     }
     
     public static void main(String[] args) {
-        System.out.println("pruebas de punto2:");
+        System.out.println("pruebas de punto3:");
         
         Punto3 p1 = new Punto3(4, 4, 1);
         System.out.println("P1 = " + p1.toString());
         
-        //TODO: test de preTimes
+        //test de preTimes
+        double[][] md1 = {{1,2,1,2}, {0,3,2,1}, {1,1,1,1}, {1,2,3,4}};
+        Matriz3 m1 = new Matriz3(md1);
+        System.out.println("M1 = \n"+m1.toString());
         
+        Punto3 pre = Punto3.preTimes(p1, m1);
+        System.out.println("P1*M1 = "+pre.toString());
         
     }
 }
