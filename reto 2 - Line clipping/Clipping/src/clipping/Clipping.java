@@ -196,7 +196,7 @@ void CohenSutherlandLineClipAndDraw(int x0, int y0, int x1, int y1, Graphics2D g
 //            System.out.println(x1+", "+y1+" - "+x2+", "+y2);
             g2d.drawLine(x+x1, y-y1, x+x2, y-y2);
         }
-        g2d.setColor(Color.orange);
+        g2d.setColor(Color.BLACK);
         createRectangle();
         int x1, y1, x2, y2;
         x1 = vertices[0];

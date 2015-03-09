@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 
-package Transform;
 
-import CG.Matriz2;
-import CG.Punto2;
+
+import CG.*;
+import CG.Transform.Rotate;
+import CG.Transform.Scale;
+import CG.Transform.Translate;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
