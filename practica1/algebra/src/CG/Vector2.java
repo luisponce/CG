@@ -64,21 +64,7 @@ public class Vector2 {
         return new Vector2(x, y);
     }
     
-    /**
-     * 
-     * @param v, el vector a rotar
-     * @param theta, el angulo a rotarlo (lo hace counter-clockwise)
-     * @return el vector rotado con el angulo que se recibio.
-     */
-    public Vector2 rotate(Vector2 v, double theta){
-        double x = v.getX();
-        double y = v.getY();
-        theta = Math.toRadians(theta) * -1;
-        
-        Vector2 res = new Vector2((x*Math.cos(theta) + y * Math.sin(theta)),
-                                 (x*Math.sin(theta)*(-1) + y * Math.cos(theta)));
-        return res;
-    }
+    
     
     @Override
     public String toString(){
@@ -115,6 +101,23 @@ public class Vector2 {
         
         Vector3 res = Vector3.cross(aux1, aux2);
         
+        return res;
+    }
+    
+    /**
+     * Rota el vector v  theta angulos en sentido contrario a las manecillas 
+     * del reloj.
+     * @param v, el vector a rotar
+     * @param theta, el angulo a rotarlo (lo hace counter-clockwise)
+     * @return el vector rotado con el angulo que se recibio.
+     */
+    public static Vector2 rotate(Vector2 v, double theta){
+        double x = v.getX();
+        double y = v.getY();
+        theta = Math.toRadians(theta) * -1;
+        
+        Vector2 res = new Vector2((x*Math.cos(theta) + y * Math.sin(theta)),
+                                 (x*Math.sin(theta)*(-1) + y * Math.cos(theta)));
         return res;
     }
     
