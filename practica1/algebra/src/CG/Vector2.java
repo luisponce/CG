@@ -64,6 +64,22 @@ public class Vector2 {
         return new Vector2(x, y);
     }
     
+    /**
+     * 
+     * @param v, el vector a rotar
+     * @param theta, el angulo a rotarlo (lo hace counter-clockwise)
+     * @return el vector rotado con el angulo que se recibio.
+     */
+    public Vector2 rotate(Vector2 v, double theta){
+        double x = v.getX();
+        double y = v.getY();
+        theta = Math.toRadians(theta) * -1;
+        
+        Vector2 res = new Vector2((x*Math.cos(theta) + y * Math.sin(theta)),
+                                 (x*Math.sin(theta)*(-1) + y * Math.cos(theta)));
+        return res;
+    }
+    
     @Override
     public String toString(){
         String str = "<";
@@ -104,6 +120,10 @@ public class Vector2 {
     
     public static void main(String[] args) {
         System.out.println("pruebas de Vector2:");
+        
+        Vector2 v = new Vector2(0.0, 10.0);
+        v = v.rotate(v, 90);
+        System.out.println("V = " + v.toString());
         
         Vector2 v1 = new Vector2(10, 15.5);
         System.out.println("V1 = " + v1.toString());
