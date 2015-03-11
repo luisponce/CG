@@ -53,6 +53,7 @@ public class Painting extends JPanel{
         super.paintComponent(g);
         
         
+               
         
         // size es el tamaño de la ventana.
         Dimension size = getSize();
