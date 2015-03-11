@@ -2,6 +2,9 @@
 
 package CG;
 
+import CG.Transform.Rotate;
+import CG.Transform.Scale;
+import CG.Transform.Translate;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -14,14 +17,19 @@ public class GameObject {
     
     int x, y;
     
+    Vector2 up, right;
+    
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
     
-    public GameObject(int x, int y, Graphics2D g2d){
+    
+    public GameObject(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e,
+            Graphics2D g2d){
         this.g2d = g2d;
         this.x = x;
         this.y = y;
-        
+        this.edges = e;
+        this.vertices = v;
     }
     
     private void paintEdge(int pos){
@@ -41,4 +49,33 @@ public class GameObject {
             paintEdge(i);
         }
     }
+    
+    public void Move(int dx, int dy){
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Translate(dx, dy)))));
+        }
+        
+        x += dx;
+        y += dy;
+    }
+    
+    public void Rotate(double angle){
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Rotate(angle)))));
+        }
+        
+        //TODO: rotar vectores up y right
+    }
+    
+    public void Scale(double sx, double sy){
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Scale(sx, sy)))));
+        }
+        
+         
+   }
+    
 }
