@@ -79,69 +79,7 @@ public class TestGameObjects extends JPanel{
         
         g2d.setColor(Color.black);
         
-        vertices.add(new Punto2(40, 40));
-        vertices.add(new Punto2(60, 40));
-        vertices.add(new Punto2(60, 60));
-        vertices.add(new Punto2(80, 60));
-        vertices.add(new Punto2(80, 40));
-        vertices.add(new Punto2(100, 40));
-        vertices.add(new Punto2(100, 100));
-        vertices.add(new Punto2(80, 100));
-        vertices.add(new Punto2(80, 120));
-        vertices.add(new Punto2(60, 120));
-        vertices.add(new Punto2(60, 100));
-        vertices.add(new Punto2(40, 100));
         
-        
-        for(int i = 0; i<12; i++){
-            Integer[] linea1 = new Integer[2];
-            linea1[0] = i;
-            linea1[1] = (i+1)%12;
-            edges.add(linea1);
-        }
-        
-        paintAllEdges(g2d);
-        
-        
-        for(int i = 0; i<12; i++) {
-            vertices.set(i, Punto2.preTimes(vertices.get(i),
-                    Matriz2.transpose((new Translate(0, 100)))));
-        }
-        
-        g2d.setColor(Color.red);
-        paintAllEdges(g2d);
-        
-        for(int i = 0; i<12; i++) {
-            vertices.set(i, Punto2.preTimes(vertices.get(i),
-                    Matriz2.transpose((new Scale(0.5, 0.5)))));
-        }
-        
-        g2d.setColor(Color.orange);
-        paintAllEdges(g2d);
-        
-        for(int i = 0; i<12; i++) {
-            vertices.set(i, Punto2.preTimes(vertices.get(i),
-                    Matriz2.transpose((new Translate(-150, 0)))));
-        }
-        
-        g2d.setColor(Color.red);
-        paintAllEdges(g2d);
-        
-        for(int i = 0; i<12; i++) {
-            vertices.set(i, Punto2.preTimes(vertices.get(i),
-                    Matriz2.transpose((new Rotate(90)))));
-        }
-        
-        g2d.setColor(Color.green);
-        paintAllEdges(g2d);
-        
-        for(int i = 0; i<12; i++) {
-            vertices.set(i, Punto2.preTimes(vertices.get(i),
-                    Matriz2.transpose((new Scale(0.5, 1.1)))));
-        }
-        
-        g2d.setColor(Color.orange);
-        paintAllEdges(g2d);
     } 
     
     

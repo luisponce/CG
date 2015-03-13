@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author mi pc
  */
 public class Game extends Canvas {
 	/** The stragey that allows us to use accelerate page flipping */
