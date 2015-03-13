@@ -5,9 +5,8 @@
  */
 package Game;
 
-import CG.GameObject;
 import CG.Punto2;
-import CG.Ship;
+import Asteroids.Ship;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;

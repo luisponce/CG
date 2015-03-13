@@ -1,10 +1,13 @@
 
 
-package CG;
+package Game;
 
+import CG.Matriz2;
+import CG.Punto2;
 import CG.Transform.Rotate;
 import CG.Transform.Scale;
 import CG.Transform.Translate;
+import CG.Vector2;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -151,8 +154,9 @@ public abstract class GameObject {
     }
     
     public boolean collidesWith(GameObject other) {
-        me.setBounds((int) x, (int) y, width, height);
-        him.setBounds((int) other.x, (int) other.y,other.getWidth(), other.getHeight());
+        me.setBounds((int) x-width/2, (int) y-height/2, width, height);
+        him.setBounds((int) other.x-other.width/2, (int) other.y-other.height/2,
+                other.getWidth(), other.getHeight());
 
         return me.intersects(him);
     }
