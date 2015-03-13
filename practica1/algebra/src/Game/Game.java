@@ -6,6 +6,8 @@
 package Game;
 
 import CG.GameObject;
+import CG.Punto2;
+import CG.Ship;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -147,6 +149,15 @@ public class Game extends Canvas {
 		// create the player ship and place it roughly in the center of the screen
 
 		//TODO: crear nave
+            Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			g.setColor(Color.WHITE);
+            ArrayList<Punto2> v = new ArrayList<>();
+            ArrayList<Integer[]> e = new ArrayList<>();
+            Ship nave = new Ship(100,200, v, e, 0, 0, g);
+            
+            entities.add(nave);
+            System.out.println("CREEEEEE LA NAVEEEEE");
+            
 	}
 	
 	/**

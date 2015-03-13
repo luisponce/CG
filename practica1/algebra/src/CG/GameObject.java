@@ -50,6 +50,24 @@ public abstract class GameObject {
         up = new Vector2(0, 1);
         right = new Vector2(1, 0);
     }
+
+    public void setVertices(ArrayList<Punto2> vertices) {
+        this.vertices = vertices;
+    }
+
+    public void setEdges(ArrayList<Integer[]> edges) {
+        this.edges = edges;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    
     
     private void paintEdge(int pos){
         Integer[] edge = edges.get(pos);
