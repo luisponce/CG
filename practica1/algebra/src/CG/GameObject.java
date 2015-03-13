@@ -6,30 +6,49 @@ import CG.Transform.Rotate;
 import CG.Transform.Scale;
 import CG.Transform.Translate;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
+
 
 /**
  *
  */
-public class GameObject {
+public abstract class GameObject {
     
     Graphics2D g2d;
     
     int x, y;
     
+    Vector2 speed;
+    
     Vector2 up, right;
+    
+    int width, height;
     
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
     
+    /** The rectangle used for this entity during collisions  resolution */
+    private Rectangle me = new Rectangle();
+    /** The rectangle used for other entities during collision resolution */
+    private Rectangle him = new Rectangle();
+    
     
     public GameObject(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e,
+            int width, int height,
             Graphics2D g2d){
         this.g2d = g2d;
         this.x = x;
         this.y = y;
         this.edges = e;
         this.vertices = v;
+        this.width = width;
+        this.height = height;
+        
+        speed = new Vector2(0, 0);
+        
+        up = new Vector2(0, 1);
+        right = new Vector2(1, 0);
     }
     
     private void paintEdge(int pos){
@@ -50,6 +69,20 @@ public class GameObject {
         }
     }
     
+    public void setSpeed(Vector2 spd){
+        speed = spd;
+    }
+    
+    public Vector2 getSpeed(){
+        return speed;
+    }
+    
+    public void fixedMove(long delta){
+        int dx = (int) (speed.getX() * delta / 1000);
+        int dy = (int) (speed.getY() * delta / 1000);
+        Move(dx, dy);
+    }
+    
     public void Move(int dx, int dy){
         for(int i = 0; i<vertices.size(); i++) {
             vertices.set(i, Punto2.preTimes(vertices.get(i),
@@ -66,16 +99,46 @@ public class GameObject {
                     Matriz2.transpose((new Rotate(angle)))));
         }
         
-        //TODO: rotar vectores up y right
+        up = Vector2.rotate(up, angle);
+        right = Vector2.rotate(right, angle);
+        
     }
     
     public void Scale(double sx, double sy){
         for(int i = 0; i<vertices.size(); i++) {
             vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Translate(-x, -y)))));
+        }
+        
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
                     Matriz2.transpose((new Scale(sx, sy)))));
         }
         
-         
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Translate(x, y)))));
+        } 
+        
+        width *= sx;
+        height *= sy;
    }
+
+    public int getHeight(){
+        return height;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public boolean collidesWith(GameObject other) {
+        me.setBounds((int) x, (int) y, width, height);
+        him.setBounds((int) other.x, (int) other.y,other.getWidth(), other.getHeight());
+
+        return me.intersects(him);
+    }
+
+    public abstract void  collidedWith(GameObject him) ;
     
 }
