@@ -8,6 +8,7 @@ package Asteroids;
 
 import Game.GameObject;
 import CG.Punto2;
+import Game.Game;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 /**
@@ -46,7 +47,9 @@ public class Bullet extends GameObject {
 
     @Override
     public void collidedWith(GameObject him) {
-        
+        if(him.getType() == 3){//asteroid
+            Game.getInstance().removeEntity(this);
+        }
     }
     
 }

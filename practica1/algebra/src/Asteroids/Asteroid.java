@@ -8,6 +8,7 @@ package Asteroids;
 
 import Game.GameObject;
 import CG.Punto2;
+import Game.Game;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -66,7 +67,14 @@ public class Asteroid extends GameObject {
 
     @Override
     public void collidedWith(GameObject him) {
-        
+        if(him.getType() == 2){//bullet
+            if(this.getLvl() == 1){
+                Game.getInstance().removeEntity(this);
+            }else{
+                this.setLvl(this.getLvl() - 1);
+                this.Scale(0.5, 0.5);
+            }
+        }
     }
     
 }
