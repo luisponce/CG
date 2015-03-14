@@ -21,16 +21,17 @@ public class Asteroid extends GameObject {
     private static final int w = 24;
     private static final int h = 24;
     
-    private void fillVerticesAndEdges(int x, int y){
-        vertices.add(new Punto2 (-6 + x,-(12 - y)));
-        vertices.add(new Punto2 (6 + x,-(12 - y)));
-        vertices.add(new Punto2 (12 + x,-(6 - y)));
-        vertices.add(new Punto2 (12 + x,-(-6 - y)));
-        vertices.add(new Punto2 (6 + x,-(-12 - y)));
-        vertices.add(new Punto2 (-6 + x,-(-12 - y)));
-        vertices.add(new Punto2 (-12 + x,-(-6 - y)));
-        vertices.add(new Punto2 (-12 + x,-(6 - y)));
-        vertices.add(new Punto2 (-6 + x,-(12 - y)));
+    private void fillVerticesAndEdges(int x, int y, int level){
+        if(level == 3) level++;
+        vertices.add(new Punto2 (-6*level + x,-(12*level - y)));
+        vertices.add(new Punto2 (6*level + x,-(12*level - y)));
+        vertices.add(new Punto2 (12*level + x,-(6*level - y)));
+        vertices.add(new Punto2 (12*level + x,-(-6*level - y)));
+        vertices.add(new Punto2 (6*level + x,-(-12*level - y)));
+        vertices.add(new Punto2 (-6*level + x,-(-12*level - y)));
+        vertices.add(new Punto2 (-12*level + x,-(-6*level - y)));
+        vertices.add(new Punto2 (-12*level + x,-(6*level - y)));
+        vertices.add(new Punto2 (-6*level + x,-(12*level - y)));
         
         for (int i = 0; i < 8; i++) {
             Integer[] linea1 = new Integer[2];
@@ -40,9 +41,9 @@ public class Asteroid extends GameObject {
         }
     }
 
-    public Asteroid(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d) {
-        super(x, y, v, e, w, h, g2d);
-        fillVerticesAndEdges(x,y);
+    public Asteroid(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d, int level) {
+        super(x, y, v, e, w * level, h * level, g2d);
+        fillVerticesAndEdges(x,y, level);
         this.setVertices(vertices);
         this.setEdges(edges);
         
