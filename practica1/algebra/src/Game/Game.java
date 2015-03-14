@@ -182,18 +182,18 @@ public class Game extends Canvas {
             if(type==0){
                 //up
                 x = seed.nextInt(w-100);
-                y = seed.nextInt(100);
+                y = seed.nextInt(100) -100;
             } else if(type==1){
                 //right
-                x = w - seed.nextInt(100);
+                x = w - seed.nextInt(100) +100;
                 y = seed.nextInt(h-100);
             } else if(type==2){
                 //down
                 x = seed.nextInt(w-100)+100;
-                y = h - seed.nextInt(100);
+                y = h - seed.nextInt(100) +100;
             } else if(type==3){
                 //left
-                x = (int) seed.nextInt(100);
+                x = (int) seed.nextInt(100) -100;
                 y = (int) seed.nextInt(h-100)+100;
             }
             
@@ -214,7 +214,6 @@ public class Game extends Canvas {
 	private void initEntities() {
 		// create the player ship and place it roughly in the center of the screen
 
-		//TODO: crear nave
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			g.setColor(Color.WHITE);
             ArrayList<Punto2> v = new ArrayList<>();
@@ -232,10 +231,10 @@ public class Game extends Canvas {
             entities.add(bullet);
             //g.fill3DRect(400, 200, 4, 4, false);
             g.fillRect(400, 200, 4, 4);
-            ship = new Ship(100,200, v, e, 0, 0, g);
+            ship = new Ship(w/2,h/2, v, e, 0, 0, g);
             
             entities.add(ship);
-            System.out.println("CREEEEEE LA NAVEEEEE");
+            
 	}
 	
 	/**
