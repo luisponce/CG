@@ -197,7 +197,9 @@ public class Game extends Canvas {
                 y = (int) seed.nextInt(h-100)+100;
             }
             
-            Asteroid enemy = new Asteroid(x,y, v, e, 0, 0, g,3);
+            int level = (seed.nextInt() % 3) + 1;
+            
+            Asteroid enemy = new Asteroid(x,y, v, e, 0, 0, g,level);
             
             dir = new Vector2(new Punto2(x,y),
                     new Punto2(w/2 + seed.nextInt(50)-50, h/2 + seed.nextInt(50)-50));
