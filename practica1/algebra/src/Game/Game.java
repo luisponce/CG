@@ -5,6 +5,8 @@
  */
 package Game;
 
+import CG.Asteroid;
+import CG.Bullet;
 import CG.GameObject;
 import CG.Punto2;
 import CG.Ship;
@@ -18,7 +20,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -155,10 +156,13 @@ public class Game extends Canvas {
             ArrayList<Punto2> v = new ArrayList<>();
             ArrayList<Integer[]> e = new ArrayList<>();
             Ship nave = new Ship(100,200, v, e, 0, 0, g);
-            
+            Asteroid enemy = new Asteroid(200,300, v, e, 0, 0, g);
+            Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
             entities.add(nave);
-            System.out.println("CREEEEEE LA NAVEEEEE");
-            
+            entities.add(enemy);
+            entities.add(bullet);
+            //g.fill3DRect(400, 200, 4, 4, false);
+            g.fillRect(400, 200, 4, 4);
 	}
 	
 	/**
