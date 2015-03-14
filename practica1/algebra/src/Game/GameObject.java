@@ -28,6 +28,8 @@ public abstract class GameObject {
     
     int width, height;
     
+    double angle;
+    
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
     
@@ -49,7 +51,7 @@ public abstract class GameObject {
         this.height = height;
         
         speed = new Vector2(0, 0);
-        
+        angle = 0.0;
         up = new Vector2(0, 1);
         right = new Vector2(1, 0);
     }
@@ -58,6 +60,10 @@ public abstract class GameObject {
         this.vertices = vertices;
     }
 
+    public ArrayList<Punto2> getVertices() {
+        return vertices;
+    }
+    
     public void setEdges(ArrayList<Integer[]> edges) {
         this.edges = edges;
     }
@@ -70,7 +76,13 @@ public abstract class GameObject {
         this.height = height;
     }
     
+     public int getX(){
+        return x;
+    }
     
+    public int getY(){
+        return y;
+    }
     
     private void paintEdge(int pos){
         Integer[] edge = edges.get(pos);
@@ -132,7 +144,12 @@ public abstract class GameObject {
         
         up = Vector2.rotate(up, angle);
         right = Vector2.rotate(right, angle);
+        this.angle = angle;
         
+    }
+    
+    public double getAngle(){
+        return angle;
     }
     
     public void Scale(double sx, double sy){

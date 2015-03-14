@@ -21,11 +21,11 @@ public class Bullet extends GameObject {
     private int height = 4;
     
     private void fillVerticesAndEdges(int x, int y){
-        vertices.add(new Punto2 (-2 + x,-(-2 - y)));
-        vertices.add(new Punto2 (2 + x,-(-2 - y)));
-        vertices.add(new Punto2 (2 + x,-(2 - y)));
-        vertices.add(new Punto2 (-2 + x,-(2 - y)));
-        vertices.add(new Punto2 (-2 + x, -(-2 - y)));
+        vertices.add(new Punto2 (-1 + x,-(-1 - y)));
+        vertices.add(new Punto2 (1 + x,-(-1 - y)));
+        vertices.add(new Punto2 (1 + x,-(1 - y)));
+        vertices.add(new Punto2 (-1 + x,-(1 - y)));
+        vertices.add(new Punto2 (-1 + x, -(-1 - y)));
         
         for (int i = 0; i < 4; i++) {
             Integer[] linea1 = new Integer[2];

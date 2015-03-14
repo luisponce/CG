@@ -160,16 +160,42 @@ public class Game extends Canvas {
             ArrayList<Integer[]> e = new ArrayList<>();
 
             Asteroid enemy = new Asteroid(200,300, v, e, 0, 0, g);
-            Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
+            //Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
             entities.add(enemy);
-            entities.add(bullet);
+            //entities.add(bullet);
             //g.fill3DRect(400, 200, 4, 4, false);
-            g.fillRect(400, 200, 4, 4);
+            //g.fillRect(400, 200, 4, 4);
             ship = new Ship(100,200, v, e, 0, 0, g);
             
             entities.add(ship);
             System.out.println("CREEEEEE LA NAVEEEEE");
 	}
+        
+        public void tryToFire() {
+            // check that we have waiting long enough to fire
+            if (System.currentTimeMillis() - lastFire < firingInterval) {
+                    return;
+            }
+
+            // if we waited long enough, create the shot entity, and record the time.
+            lastFire = System.currentTimeMillis();
+            Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			g.setColor(Color.WHITE);
+            ArrayList<Punto2> v = new ArrayList<>();
+            ArrayList<Integer[]> e = new ArrayList<>();
+            GameObject bullet = new Bullet((int)ship.getVertices().get(6).getX(), (int)ship.getVertices().get(6).getY(), v, e, 0, 0, g);
+            //bullet.Rotate(ship.getAngle());
+            bullet.up = ship.up;
+            System.out.println("UPPPPPP\n "+bullet.up.toString());
+            System.out.println("UPPPPPP\n "+bullet.up.toString());
+            System.out.println("UPPPPPP\n "+bullet.up.toString());
+            System.out.println("UPPPPPP\n "+bullet.up.toString());
+            
+            if(ship.speed.magnitude() == 0.0) 
+                bullet.setSpeed(Vector2.scale(new Vector2(ship.up.getX(),ship.up.getY()), -450));
+            else bullet.setSpeed(Vector2.scale(ship.speed, 2.5));
+            entities.add(bullet);
+        }
 	
 	/**
 	 * Notification from a game entity that the logic of the game
@@ -335,7 +361,7 @@ public class Game extends Canvas {
 			// if we're pressing fire, attempt to fire
 
 			if (firePressed) {
-//				tryToFire();
+				tryToFire();
                             System.out.println("fire!");
 			}
 			
