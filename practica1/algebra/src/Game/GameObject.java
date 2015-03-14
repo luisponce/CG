@@ -111,6 +111,18 @@ public abstract class GameObject {
     public void fixedMove(long delta){
         int dx = (int) (speed.getX() * delta / 1000);
         int dy = (int) (speed.getY() * delta / 1000);
+        
+        if(type == 1){//spaceship
+            if((x <= width/2 && dx<0) 
+                    || (x >= Game.getInstance().getW()-width/2 && dx>0)){
+                dx = 0;
+            }
+            if((y <= height/2 && dy<0) 
+                    || (y >= Game.getInstance().getH()-height/2 && dy>0)){
+                dy = 0;
+            }
+        }
+        
         Move(dx, dy);
     }
     

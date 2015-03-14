@@ -66,12 +66,22 @@ public class Game extends Canvas {
 	private boolean logicRequiredThisLoop = false;
 	
         private int w = 800;
+
+    
         private int h = 600;
         
         private double secsToSpawnAsteroid = 1000;
         private double timerSinceLastAsteroid;
         
         private static Game instance;
+        
+        public int getW() {
+            return w;
+        }
+
+        public int getH() {
+            return h;
+        }
         
         public static Game getInstance(){
             if(instance == null){
