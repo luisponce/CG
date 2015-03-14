@@ -18,8 +18,8 @@ public class Asteroid extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private int width = 8;
-    private int height = 8;
+    private static final int w = 8;
+    private static final int h = 8;
     
     private void fillVerticesAndEdges(int x, int y){
         vertices.add(new Punto2 (-2 + x,-(4 - y)));
@@ -41,19 +41,19 @@ public class Asteroid extends GameObject {
     }
 
     public Asteroid(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d) {
-        super(x, y, v, e, width, height, g2d);
+        super(x, y, v, e, w, h, g2d);
         fillVerticesAndEdges(x,y);
         this.setVertices(vertices);
         this.setEdges(edges);
-        this.setHeight(height);
-        this.setWidth(width);
+        
+        setType(3);
     }
     
     
 
     @Override
     public void collidedWith(GameObject him) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

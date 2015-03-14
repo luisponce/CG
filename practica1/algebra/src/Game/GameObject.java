@@ -20,6 +20,16 @@ public abstract class GameObject {
     
     Graphics2D g2d;
     
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    
     int x, y;
     
     Vector2 speed;
@@ -167,7 +177,8 @@ public abstract class GameObject {
         me.setBounds((int) x-width/2, (int) y-height/2, width, height);
         him.setBounds((int) other.x-other.width/2, (int) other.y-other.height/2,
                 other.getWidth(), other.getHeight());
-
+        
+        
         return me.intersects(him);
     }
 

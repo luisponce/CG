@@ -71,10 +71,19 @@ public class Game extends Canvas {
         private double secsToSpawnAsteroid = 1000;
         private double timerSinceLastAsteroid;
         
+        private static Game instance;
+        
+        public static Game getInstance(){
+            if(instance == null){
+                instance = new Game();
+            }
+            return instance;
+        }
+        
 	/**
 	 * Construct our game and set it running.
 	 */
-	public Game() {
+	private Game() {
 		// create a frame to contain our game
 
 		JFrame container = new JFrame("Asteroids");
@@ -252,7 +261,7 @@ public class Game extends Canvas {
 	 * Notification that the player has died. 
 	 */
 	public void notifyDeath() {
-		message = "Oh no! They got you, try again?";
+		message = "GAME OVER, try again?";
 		waitingForKeyPress = true;
 	}
 	
@@ -331,8 +340,10 @@ public class Game extends Canvas {
 					GameObject him = (GameObject) entities.get(s);
 					
 					if (me.collidesWith(him)) {
+                                            
 						me.collidedWith(him);
 						him.collidedWith(me);
+                                                
 					}
 				}
 			}
@@ -369,7 +380,6 @@ public class Game extends Canvas {
 			
                         if (!waitingForKeyPress) {
                             timerSinceLastAsteroid += delta;
-                            System.out.println(timerSinceLastAsteroid);
 
                             if (timerSinceLastAsteroid >= secsToSpawnAsteroid) {
                                 spawnAsteroid();
@@ -541,7 +551,7 @@ public class Game extends Canvas {
 	 * @param argv The arguments that are passed into our game
 	 */
 	public static void main(String argv[]) {
-		Game g =new Game();
+		Game g = Game.getInstance();
 
 		// Start the main game loop, note: this method will not
 

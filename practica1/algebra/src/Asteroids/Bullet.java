@@ -17,8 +17,8 @@ public class Bullet extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private int width = 4;
-    private int height = 4;
+    private static int w = 4;
+    private static int h = 4;
     
     private void fillVerticesAndEdges(int x, int y){
         vertices.add(new Punto2 (-2 + x,-(-2 - y)));
@@ -36,19 +36,19 @@ public class Bullet extends GameObject {
     }
 
     public Bullet(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d) {
-        super(x, y, v, e, width, height, g2d);
+        super(x, y, v, e, w, h, g2d);
         fillVerticesAndEdges(x,y);
         this.setVertices(vertices);
         this.setEdges(edges);
-        this.setHeight(height);
-        this.setWidth(width);
+        
+        setType(2);
     }
     
     
 
     @Override
     public void collidedWith(GameObject him) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
