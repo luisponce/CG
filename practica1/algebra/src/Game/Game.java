@@ -5,11 +5,11 @@
  */
 package Game;
 
-import CG.Asteroid;
-import CG.Bullet;
-import CG.GameObject;
+import Asteroids.Asteroid;
+import Asteroids.Bullet;
+import Asteroids.Ship;
 import CG.Punto2;
-import CG.Ship;
+import CG.Vector2;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author mi pc
  */
 public class Game extends Canvas {
 	/** The stragey that allows us to use accelerate page flipping */
@@ -56,6 +55,10 @@ public class Game extends Canvas {
 	private boolean leftPressed = false;
 	/** True if the right cursor key is currently pressed */
 	private boolean rightPressed = false;
+    /** True if the up cursor key is currently pressed */
+	private boolean upPressed = false;
+	/** True if the down cursor key is currently pressed */
+	private boolean downPressed = false;
 	/** True if we are firing */
 	private boolean firePressed = false;
 	/** True if game logic needs to be applied this loop, normally as a result of a game event */
@@ -155,14 +158,17 @@ public class Game extends Canvas {
 			g.setColor(Color.WHITE);
             ArrayList<Punto2> v = new ArrayList<>();
             ArrayList<Integer[]> e = new ArrayList<>();
-            Ship nave = new Ship(100,200, v, e, 0, 0, g);
+
             Asteroid enemy = new Asteroid(200,300, v, e, 0, 0, g);
             Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
-            entities.add(nave);
             entities.add(enemy);
             entities.add(bullet);
             //g.fill3DRect(400, 200, 4, 4, false);
             g.fillRect(400, 200, 4, 4);
+            ship = new Ship(100,200, v, e, 0, 0, g);
+            
+            entities.add(ship);
+            System.out.println("CREEEEEE LA NAVEEEEE");
 	}
 	
 	/**
@@ -300,19 +306,38 @@ public class Game extends Canvas {
 
 			// update the movement appropraitely
 
-//			ship.setHorizontalMovement(0);
-//			
-//			if ((leftPressed) && (!rightPressed)) {
-//				ship.setHorizontalMovement(-moveSpeed);
-//			} else if ((rightPressed) && (!leftPressed)) {
-//				ship.setHorizontalMovement(moveSpeed);
-//			}
-//			
-//			// if we're pressing fire, attempt to fire
-//
-//			if (firePressed) {
+			
+                        
+			
+			if ((leftPressed) && (!rightPressed)) {
+				ship.Rotate(-0.5 * delta);
+			} else if ((rightPressed) && (!leftPressed)) {
+				ship.Rotate(0.5 * delta);
+			}
+                        
+                        if ((upPressed) && (!downPressed)) {
+				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, -1.5*delta));
+                                System.out.println("up");
+			} else if ((downPressed) && (!upPressed)) {
+				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, 1.5*delta));
+                                System.out.println("down");
+                                
+			} else {
+                                
+                                if(ship.speed.magnitude() <= 0){
+                                    ship.speed = new Vector2(0, 0);
+                                } else {
+                                    ship.speed = Vector2.sub(ship.speed, Vector2.scale(ship.speed.normalized(), 1*delta));
+                                }
+                        }
+                        System.out.println(ship.speed.toString());
+			
+			// if we're pressing fire, attempt to fire
+
+			if (firePressed) {
 //				tryToFire();
-//			}
+                            System.out.println("fire!");
+			}
 			
 			// finally pause for a bit. Note: this should run us at about
 
@@ -361,6 +386,12 @@ public class Game extends Canvas {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				rightPressed = true;
 			}
+                        if (e.getKeyCode() == KeyEvent.VK_UP) {
+				upPressed = true;
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				downPressed = true;
+			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				firePressed = true;
 			}
@@ -383,6 +414,12 @@ public class Game extends Canvas {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				rightPressed = false;
+			}
+                        if (e.getKeyCode() == KeyEvent.VK_UP) {
+				upPressed = false;
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				downPressed = false;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				firePressed = false;

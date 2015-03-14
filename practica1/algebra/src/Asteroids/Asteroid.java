@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
-package CG;
+package Asteroids;
 
+import Game.GameObject;
+import CG.Punto2;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
