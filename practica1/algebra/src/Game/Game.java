@@ -236,11 +236,7 @@ public class Game extends Canvas {
             
             timerSinceLastAsteroid = 0;
             
-            Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
-           
-            entities.add(bullet);
-            //g.fill3DRect(400, 200, 4, 4, false);
-            g.fillRect(400, 200, 4, 4);
+            
             ship = new Ship(w/2,h/2, v, e, 0, 0, g);
             
             entities.add(ship);
