@@ -17,20 +17,24 @@ public class Bullet extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private static int w = 4;
-    private static int h = 4;
+    private static int w = 1;
+    private static int h = 8;
     
     private void fillVerticesAndEdges(int x, int y){
+        /*
         vertices.add(new Punto2 (-2 + x,-(-2 - y)));
         vertices.add(new Punto2 (2 + x,-(-2 - y)));
         vertices.add(new Punto2 (2 + x,-(2 - y)));
         vertices.add(new Punto2 (-2 + x,-(2 - y)));
         vertices.add(new Punto2 (-2 + x, -(-2 - y)));
+        */
+        vertices.add(new Punto2 (0 + x, -(-8 - y)));
+        vertices.add(new Punto2 (0 + x, -(8 - y)));
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             Integer[] linea1 = new Integer[2];
             linea1[0] = i;
-            linea1[1] = (i + 1) % 4;
+            linea1[1] = (i + 1) % 2;
             edges.add(linea1);
         }
     }
