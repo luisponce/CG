@@ -78,7 +78,7 @@ public class TestGameObjects extends JPanel{
         g2d.drawLine(x, y+50, x, y-50);
         
         g2d.setColor(Color.black);
-    
+      
     } 
     
     public static void main(String[] args) {
