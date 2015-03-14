@@ -18,19 +18,19 @@ public class Asteroid extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private static final int w = 8;
-    private static final int h = 8;
+    private static final int w = 24;
+    private static final int h = 24;
     
     private void fillVerticesAndEdges(int x, int y){
-        vertices.add(new Punto2 (-2 + x,-(4 - y)));
-        vertices.add(new Punto2 (2 + x,-(4 - y)));
-        vertices.add(new Punto2 (4 + x,-(2 - y)));
-        vertices.add(new Punto2 (4 + x,-(-2 - y)));
-        vertices.add(new Punto2 (2 + x,-(-4 - y)));
-        vertices.add(new Punto2 (-2 + x,-(-4 - y)));
-        vertices.add(new Punto2 (-4 + x,-(-2 - y)));
-        vertices.add(new Punto2 (-4 + x,-(2 - y)));
-        vertices.add(new Punto2 (-2 + x,-(4 - y)));
+        vertices.add(new Punto2 (-6 + x,-(12 - y)));
+        vertices.add(new Punto2 (6 + x,-(12 - y)));
+        vertices.add(new Punto2 (12 + x,-(6 - y)));
+        vertices.add(new Punto2 (12 + x,-(-6 - y)));
+        vertices.add(new Punto2 (6 + x,-(-12 - y)));
+        vertices.add(new Punto2 (-6 + x,-(-12 - y)));
+        vertices.add(new Punto2 (-12 + x,-(-6 - y)));
+        vertices.add(new Punto2 (-12 + x,-(6 - y)));
+        vertices.add(new Punto2 (-6 + x,-(12 - y)));
         
         for (int i = 0; i < 8; i++) {
             Integer[] linea1 = new Integer[2];
