@@ -21,6 +21,16 @@ public class Asteroid extends GameObject {
     private static final int w = 24;
     private static final int h = 24;
     
+    private int lvl;
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+    
     private void fillVerticesAndEdges(int x, int y, int level){
         if(level == 3) level++;
         vertices.add(new Punto2 (-6*level + x,-(12*level - y)));
@@ -46,6 +56,8 @@ public class Asteroid extends GameObject {
         fillVerticesAndEdges(x,y, level);
         this.setVertices(vertices);
         this.setEdges(edges);
+        
+        lvl = level;
         
         setType(3);
     }
