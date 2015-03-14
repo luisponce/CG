@@ -20,6 +20,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -64,10 +65,35 @@ public class Game extends Canvas {
 	/** True if game logic needs to be applied this loop, normally as a result of a game event */
 	private boolean logicRequiredThisLoop = false;
 	
+        private int w = 800;
+
+    
+        private int h = 600;
+        
+        private double secsToSpawnAsteroid = 1000;
+        private double timerSinceLastAsteroid;
+        
+        private static Game instance;
+        
+        public int getW() {
+            return w;
+        }
+
+        public int getH() {
+            return h;
+        }
+        
+        public static Game getInstance(){
+            if(instance == null){
+                instance = new Game();
+            }
+            return instance;
+        }
+        
 	/**
 	 * Construct our game and set it running.
 	 */
-	public Game() {
+	private Game() {
 		// create a frame to contain our game
 
 		JFrame container = new JFrame("Asteroids");
@@ -75,12 +101,12 @@ public class Game extends Canvas {
 		// get hold the content of the frame and set up the resolution of the game
 
 		JPanel panel = (JPanel) container.getContentPane();
-		panel.setPreferredSize(new Dimension(800,600));
+		panel.setPreferredSize(new Dimension(w,h));
 		panel.setLayout(null);
 		
 		// setup our canvas size and put it into the content of the frame
 
-		setBounds(0,0,800,600);
+		setBounds(0,0,w,h);
 		panel.add(this);
 		
 		// Tell AWT not to bother repainting our canvas since we're
@@ -143,9 +169,54 @@ public class Game extends Canvas {
 
 		leftPressed = false;
 		rightPressed = false;
+                upPressed = false;
+                downPressed = false;
 		firePressed = false;
 	}
 	
+        private void spawnAsteroid(){
+            Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			g.setColor(Color.WHITE);
+            ArrayList<Punto2> v = new ArrayList<>();
+            ArrayList<Integer[]> e = new ArrayList<>();
+            
+            Random seed = new Random();
+            
+            int type = seed.nextInt(4);
+            int x = 0;
+            int y = 0;
+            
+            Vector2 dir = new Vector2(0, 0);
+            double spd = seed.nextDouble()*0.6;
+            
+            if(type==0){
+                //up
+                x = seed.nextInt(w-100);
+                y = seed.nextInt(100) -100;
+            } else if(type==1){
+                //right
+                x = w - seed.nextInt(100) +100;
+                y = seed.nextInt(h-100);
+            } else if(type==2){
+                //down
+                x = seed.nextInt(w-100)+100;
+                y = h - seed.nextInt(100) +100;
+            } else if(type==3){
+                //left
+                x = (int) seed.nextInt(100) -100;
+                y = (int) seed.nextInt(h-100)+100;
+            }
+            
+
+            Asteroid enemy = new Asteroid(x,y, v, e, 0, 0, g, seed.nextInt(3)+1);
+            dir = new Vector2(new Punto2(x,y),
+                    new Punto2(w/2 + seed.nextInt(50)-50, h/2 + seed.nextInt(50)-50));
+            if(spd<=0.4) spd = 0.4;
+            enemy.setSpeed(Vector2.scale(dir, spd));
+            
+            entities.add(enemy);
+        }
+        
 	/**
 	 * Initialise the starting state of the entities (ship and aliens). Each
 	 * entitiy will be added to the overall list of entities in the game.
@@ -153,22 +224,27 @@ public class Game extends Canvas {
 	private void initEntities() {
 		// create the player ship and place it roughly in the center of the screen
 
-		//TODO: crear nave
             Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			g.setColor(Color.WHITE);
             ArrayList<Punto2> v = new ArrayList<>();
             ArrayList<Integer[]> e = new ArrayList<>();
 
-            Asteroid enemy = new Asteroid(200,300, v, e, 0, 0, g);
-            //Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
-            entities.add(enemy);
-            //entities.add(bullet);
+            //spawn initial asteroids
+            for(int i = 0; i<5; i++){
+                spawnAsteroid();
+            }
+            
+            timerSinceLastAsteroid = 0;
+            
+            Bullet bullet = new Bullet(400, 200, v, e, 0, 0, g);
+           
+            entities.add(bullet);
             //g.fill3DRect(400, 200, 4, 4, false);
-            //g.fillRect(400, 200, 4, 4);
-            ship = new Ship(100,200, v, e, 0, 0, g);
+            g.fillRect(400, 200, 4, 4);
+            ship = new Ship(w/2,h/2, v, e, 0, 0, g);
             
             entities.add(ship);
-            System.out.println("CREEEEEE LA NAVEEEEE");
+            
 	}
         
         public void tryToFire() {
@@ -220,7 +296,7 @@ public class Game extends Canvas {
 	 * Notification that the player has died. 
 	 */
 	public void notifyDeath() {
-		message = "Oh no! They got you, try again?";
+		message = "GAME OVER, try again?";
 		waitingForKeyPress = true;
 	}
 	
@@ -258,6 +334,8 @@ public class Game extends Canvas {
 
 			long delta = System.currentTimeMillis() - lastLoopTime;
 			lastLoopTime = System.currentTimeMillis();
+                        
+                        
 			
 			// Get hold of a graphics context for the accelerated 
 
@@ -297,8 +375,10 @@ public class Game extends Canvas {
 					GameObject him = (GameObject) entities.get(s);
 					
 					if (me.collidesWith(him)) {
+                                            
 						me.collidedWith(him);
 						him.collidedWith(me);
+                                                
 					}
 				}
 			}
@@ -333,7 +413,14 @@ public class Game extends Canvas {
 			// update the movement appropraitely
 
 			
-                        
+                        if (!waitingForKeyPress) {
+                            timerSinceLastAsteroid += delta;
+
+                            if (timerSinceLastAsteroid >= secsToSpawnAsteroid) {
+                                spawnAsteroid();
+                                timerSinceLastAsteroid = 0;
+                            }
+                        }
 			
 			if ((leftPressed) && (!rightPressed)) {
 				ship.Rotate(-0.5 * delta);
@@ -343,10 +430,10 @@ public class Game extends Canvas {
                         
                         if ((upPressed) && (!downPressed)) {
 				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, -1.5*delta));
-                                System.out.println("up");
+                                
 			} else if ((downPressed) && (!upPressed)) {
 				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, 1.5*delta));
-                                System.out.println("down");
+                                
                                 
 			} else {
                                 
@@ -356,7 +443,7 @@ public class Game extends Canvas {
                                     ship.speed = Vector2.sub(ship.speed, Vector2.scale(ship.speed.normalized(), 1*delta));
                                 }
                         }
-                        System.out.println(ship.speed.toString());
+//                        System.out.println(ship.speed.toString());
 			
 			// if we're pressing fire, attempt to fire
 
@@ -499,7 +586,7 @@ public class Game extends Canvas {
 	 * @param argv The arguments that are passed into our game
 	 */
 	public static void main(String argv[]) {
-		Game g =new Game();
+		Game g = Game.getInstance();
 
 		// Start the main game loop, note: this method will not
 

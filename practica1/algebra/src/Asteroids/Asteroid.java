@@ -18,19 +18,30 @@ public class Asteroid extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private int width = 8;
-    private int height = 8;
+    private static final int w = 24;
+    private static final int h = 24;
     
-    private void fillVerticesAndEdges(int x, int y){
-        vertices.add(new Punto2 (-2 + x,-(4 - y)));
-        vertices.add(new Punto2 (2 + x,-(4 - y)));
-        vertices.add(new Punto2 (4 + x,-(2 - y)));
-        vertices.add(new Punto2 (4 + x,-(-2 - y)));
-        vertices.add(new Punto2 (2 + x,-(-4 - y)));
-        vertices.add(new Punto2 (-2 + x,-(-4 - y)));
-        vertices.add(new Punto2 (-4 + x,-(-2 - y)));
-        vertices.add(new Punto2 (-4 + x,-(2 - y)));
-        vertices.add(new Punto2 (-2 + x,-(4 - y)));
+    private int lvl;
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+    
+    private void fillVerticesAndEdges(int x, int y, int level){
+        if(level == 3) level++;
+        vertices.add(new Punto2 (-6*level + x,-(12*level - y)));
+        vertices.add(new Punto2 (6*level + x,-(12*level - y)));
+        vertices.add(new Punto2 (12*level + x,-(6*level - y)));
+        vertices.add(new Punto2 (12*level + x,-(-6*level - y)));
+        vertices.add(new Punto2 (6*level + x,-(-12*level - y)));
+        vertices.add(new Punto2 (-6*level + x,-(-12*level - y)));
+        vertices.add(new Punto2 (-12*level + x,-(-6*level - y)));
+        vertices.add(new Punto2 (-12*level + x,-(6*level - y)));
+        vertices.add(new Punto2 (-6*level + x,-(12*level - y)));
         
         for (int i = 0; i < 8; i++) {
             Integer[] linea1 = new Integer[2];
@@ -40,20 +51,22 @@ public class Asteroid extends GameObject {
         }
     }
 
-    public Asteroid(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d) {
-        super(x, y, v, e, width, height, g2d);
-        fillVerticesAndEdges(x,y);
+    public Asteroid(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d, int level) {
+        super(x, y, v, e, w * level, h * level, g2d);
+        fillVerticesAndEdges(x,y, level);
         this.setVertices(vertices);
         this.setEdges(edges);
-        this.setHeight(height);
-        this.setWidth(width);
+        
+        lvl = level;
+        
+        setType(3);
     }
     
     
 
     @Override
     public void collidedWith(GameObject him) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

@@ -20,6 +20,16 @@ public abstract class GameObject {
     
     Graphics2D g2d;
     
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+    
     int x, y;
     
     Vector2 speed;
@@ -113,6 +123,18 @@ public abstract class GameObject {
     public void fixedMove(long delta){
         int dx = (int) (speed.getX() * delta / 1000);
         int dy = (int) (speed.getY() * delta / 1000);
+        
+        if(type == 1){//spaceship
+            if((x <= width/2 && dx<0) 
+                    || (x >= Game.getInstance().getW()-width/2 && dx>0)){
+                dx = 0;
+            }
+            if((y <= height/2 && dy<0) 
+                    || (y >= Game.getInstance().getH()-height/2 && dy>0)){
+                dy = 0;
+            }
+        }
+        
         Move(dx, dy);
     }
     
@@ -184,7 +206,8 @@ public abstract class GameObject {
         me.setBounds((int) x-width/2, (int) y-height/2, width, height);
         him.setBounds((int) other.x-other.width/2, (int) other.y-other.height/2,
                 other.getWidth(), other.getHeight());
-
+        
+        
         return me.intersects(him);
     }
 

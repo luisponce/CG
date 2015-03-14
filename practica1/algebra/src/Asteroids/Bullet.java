@@ -17,38 +17,36 @@ public class Bullet extends GameObject {
 
     private ArrayList<Punto2> vertices = new ArrayList<>();
     private ArrayList<Integer[]> edges = new ArrayList<>();
-    private int width = 4;
-    private int height = 4;
+    private static int w = 1;
+    private static int h = 8;
     
     private void fillVerticesAndEdges(int x, int y){
-        vertices.add(new Punto2 (-1 + x,-(-1 - y)));
-        vertices.add(new Punto2 (1 + x,-(-1 - y)));
-        vertices.add(new Punto2 (1 + x,-(1 - y)));
-        vertices.add(new Punto2 (-1 + x,-(1 - y)));
-        vertices.add(new Punto2 (-1 + x, -(-1 - y)));
+
+        vertices.add(new Punto2 (0 + x, -(-8 - y)));
+        vertices.add(new Punto2 (0 + x, -(8 - y)));
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             Integer[] linea1 = new Integer[2];
             linea1[0] = i;
-            linea1[1] = (i + 1) % 4;
+            linea1[1] = (i + 1) % 2;
             edges.add(linea1);
         }
     }
 
     public Bullet(int x, int y, ArrayList<Punto2> v, ArrayList<Integer[]> e, int width, int height, Graphics2D g2d) {
-        super(x, y, v, e, width, height, g2d);
+        super(x, y, v, e, w, h, g2d);
         fillVerticesAndEdges(x,y);
         this.setVertices(vertices);
         this.setEdges(edges);
-        this.setHeight(height);
-        this.setWidth(width);
+        
+        setType(2);
     }
     
     
 
     @Override
     public void collidedWith(GameObject him) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
