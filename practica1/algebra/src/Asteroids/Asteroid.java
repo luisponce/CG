@@ -68,6 +68,7 @@ public class Asteroid extends GameObject {
     @Override
     public void collidedWith(GameObject him) {
         if(him.getType() == 2){//bullet
+            Game.getInstance().score();
             if(this.getLvl() == 1){
                 Game.getInstance().removeEntity(this);
             }else{

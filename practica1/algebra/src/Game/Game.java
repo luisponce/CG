@@ -47,6 +47,8 @@ public class Game extends Canvas {
 	private long firingInterval = 500;
 	/** The number of aliens left on the screen */
 	private int alienCount;
+        
+        private int score = 0;
 	
 	/** The message to display which waiting for a key press */
 	private String message = "";
@@ -164,6 +166,7 @@ public class Game extends Canvas {
 
 		entities.clear();
 		initEntities();
+                score = 0;
 		
 		// blank out any keyboard settings we might currently have
 
@@ -256,12 +259,8 @@ public class Game extends Canvas {
             ArrayList<Punto2> v = new ArrayList<>();
             ArrayList<Integer[]> e = new ArrayList<>();
             GameObject bullet = new Bullet((int)ship.getVertices().get(6).getX(), (int)ship.getVertices().get(6).getY(), v, e, 0, 0, g);
-            //bullet.Rotate(ship.getAngle());
+            bullet.Rotate(ship.getAngle());
             bullet.up = ship.up;
-            System.out.println("UPPPPPP\n "+bullet.up.toString());
-            System.out.println("UPPPPPP\n "+bullet.up.toString());
-            System.out.println("UPPPPPP\n "+bullet.up.toString());
-            System.out.println("UPPPPPP\n "+bullet.up.toString());
             
             if(ship.speed.magnitude() == 0.0) 
                 bullet.setSpeed(Vector2.scale(new Vector2(ship.up.getX(),ship.up.getY()), -450));
@@ -287,6 +286,10 @@ public class Game extends Canvas {
 	public void removeEntity(GameObject entity) {
 		removeList.add(entity);
 	}
+        
+        public void score(){
+            score++;
+        }
 	
 	/**
 	 * Notification that the player has died. 
@@ -392,7 +395,8 @@ public class Game extends Canvas {
 			if (waitingForKeyPress) {
 				g.setColor(Color.white);
 				g.drawString(message,(800-g.getFontMetrics().stringWidth(message))/2,250);
-				g.drawString("Press any key",(800-g.getFontMetrics().stringWidth("Press any key"))/2,300);
+                                g.drawString("SCORE: "+score,(800-g.getFontMetrics().stringWidth("SCORE: "+score))/2,300);
+				g.drawString("Press any key",(800-g.getFontMetrics().stringWidth("Press any key"))/2,350);
 			}
 			
 			// finally, we've completed drawing so clear up the graphics
@@ -436,7 +440,9 @@ public class Game extends Canvas {
                                 if(ship.speed.magnitude() <= 0){
                                     ship.speed = new Vector2(0, 0);
                                 } else {
+                                    if(ship.speed.magnitude() >= 3.5)
                                     ship.speed = Vector2.sub(ship.speed, Vector2.scale(ship.speed.normalized(), 1*delta));
+                                    else ship.speed = new Vector2(0, 0);
                                 }
                         }
 //                        System.out.println(ship.speed.toString());
@@ -445,7 +451,6 @@ public class Game extends Canvas {
 
 			if (firePressed) {
 				tryToFire();
-                            System.out.println("fire!");
 			}
 			
 			// finally pause for a bit. Note: this should run us at about
