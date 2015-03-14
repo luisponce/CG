@@ -104,6 +104,10 @@ public class Vector2 {
         return res;
     }
     
+    public static Vector2 scale(final Vector2 v, double scale){
+        return new Vector2(v.getX()*scale, v.getY()*scale);
+    }
+    
     /**
      * Rota el vector v  theta angulos en sentido contrario a las manecillas 
      * del reloj.

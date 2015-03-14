@@ -7,6 +7,7 @@ package Game;
 
 import CG.Punto2;
 import Asteroids.Ship;
+import CG.Vector2;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -156,9 +157,9 @@ public class Game extends Canvas {
 			g.setColor(Color.WHITE);
             ArrayList<Punto2> v = new ArrayList<>();
             ArrayList<Integer[]> e = new ArrayList<>();
-            Ship nave = new Ship(100,200, v, e, 0, 0, g);
+            ship = new Ship(100,200, v, e, 0, 0, g);
             
-            entities.add(nave);
+            entities.add(ship);
             System.out.println("CREEEEEE LA NAVEEEEE");
             
 	}
@@ -298,19 +299,37 @@ public class Game extends Canvas {
 
 			// update the movement appropraitely
 
-			ship.setHorizontalMovement(0);
+			
+                        
 			
 			if ((leftPressed) && (!rightPressed)) {
-				ship.setHorizontalMovement(-moveSpeed);
+				ship.Rotate(-0.5 * delta);
 			} else if ((rightPressed) && (!leftPressed)) {
-				ship.setHorizontalMovement(moveSpeed);
+				ship.Rotate(0.5 * delta);
 			}
+                        
+                        if ((upPressed) && (!downPressed)) {
+				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, -1.5*delta));
+                                System.out.println("up");
+			} else if ((downPressed) && (!upPressed)) {
+				ship.speed = Vector2.add(ship.speed, Vector2.scale(ship.up, 1.5*delta));
+                                System.out.println("down");
+                                
+			} else {
+                                
+                                if(ship.speed.magnitude() <= 0){
+                                    ship.speed = new Vector2(0, 0);
+                                } else {
+                                    ship.speed = Vector2.sub(ship.speed, Vector2.scale(ship.speed.normalized(), 1*delta));
+                                }
+                        }
+                        System.out.println(ship.speed.toString());
 			
 			// if we're pressing fire, attempt to fire
 
 			if (firePressed) {
 //				tryToFire();
-                System.out.println("fire!");
+                            System.out.println("fire!");
 			}
 			
 			// finally pause for a bit. Note: this should run us at about
@@ -360,7 +379,7 @@ public class Game extends Canvas {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				rightPressed = true;
 			}
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                        if (e.getKeyCode() == KeyEvent.VK_UP) {
 				upPressed = true;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -388,6 +407,12 @@ public class Game extends Canvas {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				rightPressed = false;
+			}
+                        if (e.getKeyCode() == KeyEvent.VK_UP) {
+				upPressed = false;
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				downPressed = false;
 			}
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				firePressed = false;

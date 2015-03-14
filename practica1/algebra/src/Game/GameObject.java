@@ -117,8 +117,18 @@ public abstract class GameObject {
     public void Rotate(double angle){
         for(int i = 0; i<vertices.size(); i++) {
             vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Translate(-x, -y)))));
+        }
+        
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
                     Matriz2.transpose((new Rotate(angle)))));
         }
+        
+        for(int i = 0; i<vertices.size(); i++) {
+            vertices.set(i, Punto2.preTimes(vertices.get(i),
+                    Matriz2.transpose((new Translate(x, y)))));
+        } 
         
         up = Vector2.rotate(up, angle);
         right = Vector2.rotate(right, angle);
@@ -162,5 +172,7 @@ public abstract class GameObject {
     }
 
     public abstract void  collidedWith(GameObject him) ;
+
+    
     
 }
