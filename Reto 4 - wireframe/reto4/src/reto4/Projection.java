@@ -71,13 +71,7 @@ public class Projection extends JPanel{
         edges.add(linea1);
     }
     
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        
-               
-        
+    public void init(Graphics g){
         // size es el tamaño de la ventana.
         Dimension size = getSize();
         // Insets son los bordes y los títulos de la ventana.
@@ -92,10 +86,7 @@ public class Projection extends JPanel{
         
         Graphics2D g2d = (Graphics2D) g;
         
-        g2d.setColor(Color.blue); 
         
-        g2d.drawLine(-50+x, y, x+50, y);
-        g2d.drawLine(x, y+50, x, y-50);
         
         g2d.setColor(Color.black);
         
@@ -111,8 +102,6 @@ public class Projection extends JPanel{
         
         vertices3D.add(new Punto3(60, 60, 20));//6
         vertices3D.add(new Punto3(60, 60, 25));//7
-        
-        
         
         from2Dto3D();
         
@@ -133,9 +122,23 @@ public class Projection extends JPanel{
         
         addEdge(5, 7);
         
+        
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        Graphics2D g2d = (Graphics2D) g;
+        
+        g2d.setColor(Color.blue); 
+        
+        g2d.drawLine(-50+x, y, x+50, y);
+        g2d.drawLine(x, y+50, x, y-50);
+        
+        g2d.setColor(Color.black);
+        
         paintAllEdges(g2d);
-        
-        
        
         
 //        for(int i = 0; i<12; i++) {
@@ -157,6 +160,8 @@ public class Projection extends JPanel{
       // Agregar un JPanel que se llama Points (esta clase)
       Projection c = new Projection();
       
+      
+      
       frame.add(c);
       // Asignarle tamaño
       frame.setSize(500, 500);
@@ -168,8 +173,8 @@ public class Projection extends JPanel{
       //c.fillWithRandom();
       //no se puede cambiar el tamaño
       frame.setResizable(false);
-     
       
+      c.init(c.getGraphics());
       
     }
 }
