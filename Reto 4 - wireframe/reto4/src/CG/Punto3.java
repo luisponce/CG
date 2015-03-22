@@ -51,6 +51,13 @@ public class Punto3 {
         coords[2] = z;
     }
     
+    public void divideByW(){
+        setX(getX()/coords[3]);
+        setY(getY()/coords[3]);
+        setZ(getZ()/coords[3]);
+        coords[3] = 1;
+    }
+    
     //TODO: implementar operacion premultiplicar por matriz
     public static Punto3 preTimes(Punto3 p3, Matriz3 m2){
         double[] res = new double [4];
