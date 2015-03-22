@@ -141,13 +141,27 @@ public class Projection extends JPanel{
         paintAllEdges(g2d);
        
         
-//        for(int i = 0; i<12; i++) {
-//            vertices.set(i, Punto2.preTimes(vertices.get(i),
-//                    Matriz2.transpose((new Scale(0.5, 1.1)))));
-//        }
-//        
-//        g2d.setColor(Color.orange);
-//        paintAllEdges(g2d);
+        for(int i = 0; i<8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose((new Translate(20.0, 20.0, 15.0)))));
+        }
+        
+        from2Dto3D();
+        
+        g2d.setColor(Color.orange);
+        paintAllEdges(g2d);
+        
+        for(int i = 0; i<8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose((new Scale(15.0, 15.0, 15.0)))));
+        }
+        
+        from2Dto3D();
+        
+        g2d.setColor(Color.green);
+        paintAllEdges(g2d);
+         
+        
     } 
     
     

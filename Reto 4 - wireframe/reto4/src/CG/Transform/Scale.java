@@ -6,18 +6,19 @@
 
 package CG.Transform;
 
-import CG.Matriz2;
+import CG.Matriz3;
 
 /**
  *
  */
-public class Scale extends CG.Matriz2{
-    public Scale(double sx, double sy) {
+public class Scale extends CG.Matriz3{
+    public Scale(double sx, double sy, double sz) {
         super();
         
-        double[][] s = {{sx, 0,  0},
-                        {0,  sy, 0},
-                        {0,  0,  1}};
+        double[][] s = {{sx, 0, 0, 0},
+                        {0, sy, 0, 0},
+                        {0, 0, sz, 0},
+                        {0, 0, 0, 1}};
         
         this.setMatrix(s);
     }
@@ -27,10 +28,11 @@ public class Scale extends CG.Matriz2{
         
         double sx = 2;
         double sy = 2;
+        double sz = 2;
         System.out.println("sx = "+sx);
         System.out.println("sy = "+sy);
         
-        Matriz2 m1 = new Scale(sx, sy);
+        Matriz3 m1 = new Scale(sx, sy, sz);
         System.out.println("S = \n"+m1.toString());
     }
 }

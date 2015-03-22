@@ -6,19 +6,20 @@
 
 package CG.Transform;
 
-import CG.Matriz2;
+import CG.Matriz3;
 
 /**
  * esta clase representa las transormaciones de traslacion
  */
-public class Translate extends CG.Matriz2 {
+public class Translate extends CG.Matriz3 {
     
-    public Translate(double dx, double dy) {
+    public Translate(double dx, double dy, double dz) {
         super();
         
-        double[][] t = {{1, 0, dx},
-                        {0, 1, dy},
-                        {0, 0, 1}};
+        double[][] t = {{1, 0, 0, dx},
+                        {0, 1, 0, dy},
+                        {0, 0, 1, dz},
+                        {0, 0, 0, 1}};
         
         this.setMatrix(t);
     }
@@ -28,10 +29,11 @@ public class Translate extends CG.Matriz2 {
         
         double dx = 5;
         double dy = 3.5;
+        double dz = 6.3;
         System.out.println("dx = "+dx);
         System.out.println("dy = "+dy);
         
-        Matriz2 m1 = new Translate(dx, dy);
+        Matriz3 m1 = new Translate(dx, dy, dz);
         System.out.println("T = \n"+m1.toString());
     }
     
