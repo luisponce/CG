@@ -19,6 +19,16 @@ public class Matriz3 {
     public Matriz3() {
         matrix = new double [4][4];
     }
+
+    public void setMatrix(double[][] matrix) {
+        this.matrix = matrix;
+    }
+    
+    
+    public double[][] getMatrix() {
+        return matrix;
+    }
+    
     
     public double getValue(int i, int j){
         return matrix[i][j];

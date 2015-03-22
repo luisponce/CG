@@ -6,36 +6,56 @@
 
 package CG.Transform;
 
-import CG.Matriz2;
+import CG.Matriz3;
 
 /**
  *
  */
-public class Rotate extends CG.Matriz2{
-    /**
-     * Constructor de la matriz de transformacion de rotacion
-     * @param theta Los grados que se desean rotar
-     */
-    public Rotate(double theta) {
+public class Rotate extends CG.Matriz3{
+    
+    public Rotate(double thetaX, double thetaY, double thetaZ) {
         super();
         
+        Matriz3 r = rotateX(thetaX);
+        r = Matriz3.times(r, rotateY(thetaY));
+        r = Matriz3.times(r, rotateZ(thetaZ));
+        
+        this.setMatrix(r.getMatrix());
+    }
+    
+    private Matriz3 rotateZ(double theta){
         double cos = Math.cos(Math.toRadians(theta));
         double sin = Math.sin(Math.toRadians(theta));
         
-        double[][] r = {{cos, -sin, 0},
-                        {sin, cos,  0},
-                        {0,   0,    1}};
+        double[][] r = {{cos, -sin, 0, 0},
+                        {sin, cos,  0, 0},
+                        {0,   0,    1, 0},
+                        {0,   0,    0, 1}};
         
-        this.setMatrix(r);
+        return new Matriz3(r);
     }
     
-    public static void main(String[] args) {
-        System.out.println("pruebas de rotacion:");
+    private Matriz3 rotateY(double theta){
+        double cos = Math.cos(Math.toRadians(theta));
+        double sin = Math.sin(Math.toRadians(theta));
         
-        double theta = 180;
-        System.out.println("theta = "+theta);
+        double[][] r = {{cos,  0, sin, 0},
+                        {0,    1, 0,   0},
+                        {-sin, 0, cos, 0},
+                        {0,    0, 0,   1}};
         
-        Matriz2 m1 = new Rotate(theta);
-        System.out.println("R = \n"+m1.toString());
+        return new Matriz3(r);
+    }
+    
+    private Matriz3 rotateX(double theta){
+        double cos = Math.cos(Math.toRadians(theta));
+        double sin = Math.sin(Math.toRadians(theta));
+        
+        double[][] r = {{1, 0,   0,    0},
+                        {0, cos, -sin, 0},
+                        {0, sin, cos,  0},
+                        {0, 0,   0,    1}};
+        
+        return new Matriz3(r);
     }
 }
