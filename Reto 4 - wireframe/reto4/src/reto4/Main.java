@@ -17,8 +17,17 @@ public class Main extends JFrame {
     private PnlTransform panelControl;
     private Projection panelProjections;
     
+    private static Main instance = null;
+    
+    public static Main getInstance(){
+        if(instance == null){
+            instance = new Main();
+        }
+        return instance;
+    }
+    
    public Projection getPanelProjections(){
-       return panelProjections;
+       return this.panelProjections;
    } 
     public Main() { 
         setTitle("Projections");
@@ -44,7 +53,7 @@ public class Main extends JFrame {
     }
     
     public static void main (String args[]) { 
-        Main ventana = new Main();
+        Main ventana = getInstance();
         
         //ventana.panelProjections.init(ventana.getGraphics());
         ventana.setVisible(true);
