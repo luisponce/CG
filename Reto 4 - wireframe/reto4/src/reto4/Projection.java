@@ -31,6 +31,7 @@ public class Projection extends JPanel{
     ArrayList<Integer[]> edges = new ArrayList<>();
     private int x;
     private int y;
+    public Graphics2D graphics2;
     //private Main principal;
     
     public Projection(){
@@ -134,27 +135,28 @@ public class Projection extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        Graphics2D g2d = (Graphics2D) g;
+        //Graphics2D g2d = (Graphics2D) g;
+        graphics2 = (Graphics2D) g;
         
-        g2d.setColor(Color.blue); 
+        graphics2.setColor(Color.blue); 
         
-        g2d.drawLine(-50+x, y, x+50, y);
-        g2d.drawLine(x, y+50, x, y-50);
+        graphics2.drawLine(-50+x, y, x+50, y);
+        graphics2.drawLine(x, y+50, x, y-50);
         
-        g2d.setColor(Color.black);
+        graphics2.setColor(Color.black);
         
-        paintAllEdges(g2d);
+        paintAllEdges(graphics2);
        
         
-        for(int i = 0; i<8; i++) {
+        /*for(int i = 0; i<8; i++) {
             vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
                     Matriz3.transpose((new Translate(20.0, 20.0, 15.0)))));
         }
         
         from2Dto3D();
         
-        g2d.setColor(Color.orange);
-        paintAllEdges(g2d);
+        graphics2.setColor(Color.orange);
+        paintAllEdges(graphics2);
         
         for(int i = 0; i<8; i++) {
             vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
@@ -163,8 +165,9 @@ public class Projection extends JPanel{
         
         from2Dto3D();
         
-        g2d.setColor(Color.green);
-        paintAllEdges(g2d);
+        graphics2.setColor(Color.green);
+        paintAllEdges(graphics2);
+        */
          
         
     } 
