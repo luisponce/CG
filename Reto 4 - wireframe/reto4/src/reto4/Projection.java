@@ -44,10 +44,6 @@ public class Projection extends JPanel{
        //this.principal = principal;
     }
     
-    public Graphics inicializarGraphics() {
-        return this.getGraphics();
-    }
-    
     public void paintEdge(int pos, Graphics2D g2d){
         Integer[] edge = edges.get(pos);
         

@@ -36,6 +36,9 @@ public class Main extends JFrame {
         add(panelControl);
         add(panelProjections);
         
+        panelProjections.init();
+        panelControl.setVisible(true);
+        panelProjections.setVisible(true);
     }
     
     public static void main (String args[]) { 
