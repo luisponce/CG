@@ -87,25 +87,8 @@ public class Projection extends JPanel{
         edges.add(linea1);
     }
     
-    public void init(Graphics g){
-        // size es el tamaño de la ventana.
-        Dimension size = getSize();
-        // Insets son los bordes y los títulos de la ventana.
-        Insets insets = getInsets();
-
-        int screenW =  size.width - insets.left - insets.right;
-        int screenH =  size.height - insets.top - insets.bottom;
-
-        x = screenW/2;
-        y = screenH/2;
-        
-        
-        Graphics2D g2d = (Graphics2D) g;
-        
-        
-        
-        g2d.setColor(Color.black);
-        
+    public void init(){
+            
         vertices3D.clear();
         vertices3D.add(new Punto3(40, 40, 20));//0
         vertices3D.add(new Punto3(40, 40, 25));//1

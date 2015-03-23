@@ -35,13 +35,12 @@ public class Main extends JFrame {
          
         add(panelControl);
         add(panelProjections);
-        panelProjections.init(panelProjections.inicializarGraphics());
-        panelControl.setVisible(true);
-        panelProjections.setVisible(true);
+        
     }
     
     public static void main (String args[]) { 
         Main ventana = new Main();
+        
         //ventana.panelProjections.init(ventana.getGraphics());
         ventana.setVisible(true);
     } 
