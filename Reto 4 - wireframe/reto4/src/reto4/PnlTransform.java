@@ -5,6 +5,10 @@
  */
 package reto4;
 
+import CG.Matriz3;
+import CG.Punto3;
+import CG.Transform.Translate;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -230,6 +234,18 @@ public class PnlTransform extends javax.swing.JPanel {
     
     public void update(){
         System.out.println("Holaaaa");
+        
+        double x = Double.parseDouble(getPositionX());
+        double y = Double.parseDouble(getPositionY());
+        double z = Double.parseDouble(getPositionZ());
+        
+        double tx = Double.parseDouble(getRotationX());
+        double ty = Double.parseDouble(getRotationY());
+        double tz = Double.parseDouble(getRotationZ());
+        
+        double sx = Double.parseDouble(getScaleX());
+        double sy = Double.parseDouble(getScaleY());
+        double sz = Double.parseDouble(getScaleZ());
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

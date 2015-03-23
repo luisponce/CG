@@ -17,7 +17,9 @@ public class Main extends JFrame {
     private PnlTransform panelControl;
     private Projection panelProjections;
     
-    
+   public Projection getPanelProjections(){
+       return panelProjections;
+   } 
     public Main() { 
         setTitle("Projections");
         setSize(920, 450);
