@@ -281,6 +281,7 @@ public class PnlTransform extends javax.swing.JPanel {
         main.getPanelProjections().from2Dto3D();
         main.getPanelProjections().graphics2.setColor(Color.red);
         main.getPanelProjections().paintAllEdges(main.getPanelProjections().graphics2);
+        main.getPanelProjections().Repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
