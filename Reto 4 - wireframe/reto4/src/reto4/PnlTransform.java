@@ -249,6 +249,8 @@ public class PnlTransform extends javax.swing.JPanel {
         double sy = Double.parseDouble(getScaleY());
         double sz = Double.parseDouble(getScaleZ());
         
+        int pe = Integer.parseInt(txtFOV.getText());
+        
         //for(int i = 0; i<8; i++) {
         //    vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
         //            Matriz3.transpose((new Translate(20.0, 20.0, 15.0)))));
@@ -278,7 +280,7 @@ public class PnlTransform extends javax.swing.JPanel {
                     Matriz3.transpose(new Rotate(tx,ty,tz))));
         }
         
-        main.getPanelProjections().from2Dto3D();
+        main.getPanelProjections().from2Dto3D(pe);
         main.getPanelProjections().graphics2.setColor(Color.red);
         main.getPanelProjections().paintAllEdges(main.getPanelProjections().graphics2);
         main.getPanelProjections().Repaint();

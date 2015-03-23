@@ -67,13 +67,13 @@ public class Projection extends JPanel{
         }
     }
     
-    public void from2Dto3D(){
+    public void from2Dto3D(int pe){
         vertices.clear();
         for (int i = 0; i < vertices3D.size(); i++) {
             
             
              Punto3 p = (Punto3.preTimes(vertices3D.get(i),
-                    Matriz3.transpose((new Perspective(25)))));
+                    Matriz3.transpose((new Perspective(pe)))));
              
              p.divideByW();
              
@@ -113,7 +113,7 @@ public class Projection extends JPanel{
         vertices3D.add(new Punto3(60, 60, 20));//6
         vertices3D.add(new Punto3(60, 60, 25));//7
         
-        from2Dto3D();
+        from2Dto3D(25);
         
         addEdge(0, 1);
         addEdge(0, 2);
