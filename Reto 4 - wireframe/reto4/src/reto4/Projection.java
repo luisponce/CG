@@ -18,9 +18,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.border.TitledBorder;
 /**
  *
  */
@@ -28,9 +29,24 @@ public class Projection extends JPanel{
     ArrayList<Punto3> vertices3D = new ArrayList<>();
     ArrayList<Punto2> vertices = new ArrayList<>();
     ArrayList<Integer[]> edges = new ArrayList<>();
-    
     private int x;
     private int y;
+    //private Main principal;
+    
+    public Projection(){
+      setSize(500, 500);
+      setBackground(Color.decode("#FFFFFF"));
+      setLayout(null);
+      setPreferredSize(new Dimension(500, 500));
+
+       TitledBorder border = BorderFactory.createTitledBorder("Dibujador de proyecciones");
+       setBorder(border);
+       //this.principal = principal;
+    }
+    
+    public Graphics inicializarGraphics() {
+        return this.getGraphics();
+    }
     
     public void paintEdge(int pos, Graphics2D g2d){
         Integer[] edge = edges.get(pos);
@@ -163,18 +179,12 @@ public class Projection extends JPanel{
          
         
     } 
-    
-    
-    public static void main(String[] args) {
- 
-      // Crear un nuevo Frame
-      JFrame frame = new JFrame("Transforming");
+    /*public static void main(String[] args) {
+        JFrame frame = new JFrame("Transforming");
       // Al cerrar el frame, termina la ejecución de este programa
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       // Agregar un JPanel que se llama Points (esta clase)
       Projection c = new Projection();
-      
-      
       
       frame.add(c);
       // Asignarle tamaño
@@ -189,6 +199,5 @@ public class Projection extends JPanel{
       frame.setResizable(false);
       
       c.init(c.getGraphics());
-      
-    }
+    }*/
 }

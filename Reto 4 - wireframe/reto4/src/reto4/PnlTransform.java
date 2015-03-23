@@ -5,16 +5,21 @@
  */
 package reto4;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  */
 public class PnlTransform extends javax.swing.JPanel {
 
+    private Main principal;
     /**
      * Creates new form PnlTransform
      */
-    public PnlTransform() {
+    public PnlTransform(Main principal) {
         initComponents();
+        this.principal = principal;
     }
 
     /**
@@ -53,7 +58,7 @@ public class PnlTransform extends javax.swing.JPanel {
         txtPosZ2 = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Position"));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("x");
@@ -83,7 +88,11 @@ public class PnlTransform extends javax.swing.JPanel {
         txtFOV.setText("25");
 
         btnUpdate.setText("Update");
-        btnUpdate.setActionCommand("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -110,7 +119,7 @@ public class PnlTransform extends javax.swing.JPanel {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Rotation"));
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("x");
@@ -134,7 +143,7 @@ public class PnlTransform extends javax.swing.JPanel {
         jPanel3.add(txtPosZ1);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Scale"));
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("x");
@@ -179,10 +188,48 @@ public class PnlTransform extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
+    public String getPositionX() {
+        return txtPosX.getText();
+    }
+    
+    public String getPositionY() {
+        return txtPosY.getText();
+    }
+    
+    public String getPositionZ() {
+        return txtPosZ.getText();
+    }
+    
+    public String getRotationX() {
+        return txtPosX1.getText();
+    }
+    
+    public String getRotationY() {
+        return txtPosY1.getText();
+    }
+    
+    public String getRotationZ() {
+        return txtPosZ1.getText();
+    }
+    
+    public String getScaleX() {
+        return txtPosX2.getText();
+    }
+    
+    public String getScaleY() {
+        return txtPosY2.getText();
+    }
+    
+    public String getScaleZ() {
+        return txtPosZ2.getText();
+    }
+    
     public void update(){
-        
-        
+        System.out.println("Holaaaa");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -212,4 +259,5 @@ public class PnlTransform extends javax.swing.JPanel {
     private javax.swing.JTextField txtPosZ1;
     private javax.swing.JTextField txtPosZ2;
     // End of variables declaration//GEN-END:variables
+
 }
