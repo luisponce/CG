@@ -7,6 +7,8 @@ package reto4;
 
 import CG.Matriz3;
 import CG.Punto3;
+import CG.Transform.Rotate;
+import CG.Transform.Scale;
 import CG.Transform.Translate;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -246,6 +248,38 @@ public class PnlTransform extends javax.swing.JPanel {
         double sx = Double.parseDouble(getScaleX());
         double sy = Double.parseDouble(getScaleY());
         double sz = Double.parseDouble(getScaleZ());
+        
+        //for(int i = 0; i<8; i++) {
+        //    vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+        //            Matriz3.transpose((new Translate(20.0, 20.0, 15.0)))));
+        //}
+        
+        //from2Dto3D();
+        
+        //g2d.setColor(Color.orange);
+        //paintAllEdges(g2d);
+        
+        Main main = Main.getInstance();
+        
+        for (int i = 0; i < 8; i++) {
+            main.getPanelProjections().vertices3D.set(i, Punto3.preTimes(main.getPanelProjections().vertices3D.get(i),
+                    Matriz3.transpose(new Translate(x,y,z))));
+        }
+        
+        
+        for (int i = 0; i < 8; i++) {
+            main.getPanelProjections().vertices3D.set(i, Punto3.preTimes(main.getPanelProjections().vertices3D.get(i),
+                    Matriz3.transpose(new Scale(sx,sy,sz))));
+        }
+        
+        
+        for (int i = 0; i < 8; i++) {
+            main.getPanelProjections().vertices3D.set(i, Punto3.preTimes(main.getPanelProjections().vertices3D.get(i),
+                    Matriz3.transpose(new Rotate(tx,ty,tz))));
+        }
+        
+        main.getPanelProjections().from2Dto3D();
+        //main.getPanelProjections().paintAllEdges(g2d);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
