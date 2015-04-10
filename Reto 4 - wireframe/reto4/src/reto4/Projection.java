@@ -68,6 +68,7 @@ public class Projection extends JPanel{
     }
     
     public void from2Dto3D(int pe){
+        pe = -pe;
         vertices.clear();
         for (int i = 0; i < vertices3D.size(); i++) {
             
@@ -101,17 +102,17 @@ public class Projection extends JPanel{
         y = screenH/2;
         
         vertices3D.clear();
-        vertices3D.add(new Punto3(40, 40, 20));//0
-        vertices3D.add(new Punto3(40, 40, 25));//1
+        vertices3D.add(new Punto3(40, 40, -20));//0
+        vertices3D.add(new Punto3(40, 40, -25));//1
         
-        vertices3D.add(new Punto3(60, 40, 20));//2
-        vertices3D.add(new Punto3(60, 40, 25));//3
+        vertices3D.add(new Punto3(60, 40, -20));//2
+        vertices3D.add(new Punto3(60, 40, -25));//3
         
-        vertices3D.add(new Punto3(40, 60, 20));//4
-        vertices3D.add(new Punto3(40, 60, 25));//5
+        vertices3D.add(new Punto3(40, 60, -20));//4
+        vertices3D.add(new Punto3(40, 60, -25));//5
         
-        vertices3D.add(new Punto3(60, 60, 20));//6
-        vertices3D.add(new Punto3(60, 60, 25));//7
+        vertices3D.add(new Punto3(60, 60, -20));//6
+        vertices3D.add(new Punto3(60, 60, -25));//7
         
         from2Dto3D(25);
         
