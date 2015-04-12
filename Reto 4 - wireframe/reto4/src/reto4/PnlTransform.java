@@ -280,9 +280,9 @@ public class PnlTransform extends javax.swing.JPanel {
                     Matriz3.transpose(new Rotate(tx,ty,tz))));
         }
         
-        main.getPanelProjections().from2Dto3D(pe);
+        
         main.getPanelProjections().graphics2.setColor(Color.red);
-        main.getPanelProjections().paintAllEdges(main.getPanelProjections().graphics2);
+        main.getPanelProjections().fov = pe;
         main.getPanelProjections().Repaint();
     }
     

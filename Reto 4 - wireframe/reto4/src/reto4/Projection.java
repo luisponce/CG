@@ -17,6 +17,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -34,6 +36,17 @@ public class Projection extends JPanel{
     public Graphics2D graphics2;
     //private Main principal;
     
+    /** True if the left cursor key is currently pressed */
+	public boolean leftPressed = false;
+	/** True if the right cursor key is currently pressed */
+	public boolean rightPressed = false;
+    /** True if the up cursor key is currently pressed */
+	public boolean upPressed = false;
+	/** True if the down cursor key is currently pressed */
+	public boolean downPressed = false;
+        
+    public int fov = 25; 
+    
     public Projection(){
       setSize(500, 500);
       setBackground(Color.decode("#FFFFFF"));
@@ -42,10 +55,36 @@ public class Projection extends JPanel{
 
        TitledBorder border = BorderFactory.createTitledBorder("Dibujador de proyecciones");
        setBorder(border);
+       
        //this.principal = principal;
     }
     
     public void Repaint(){
+        if(leftPressed){
+            for (int i = 0; i < 8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose(new Translate(-0.001,0,0))));
+            }
+        } 
+        if(rightPressed){
+            for (int i = 0; i < 8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose(new Translate(0.001,0,0))));
+            }
+        }
+        if(upPressed){
+            for (int i = 0; i < 8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose(new Translate(0,0.001,0))));
+            }
+        }
+        if(downPressed){
+            for (int i = 0; i < 8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose(new Translate(0,-0.001,0))));
+            }
+        }
+        
         repaint();
     }
     
@@ -140,6 +179,8 @@ public class Projection extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        
+        
         //Graphics2D g2d = (Graphics2D) g;
         graphics2 = (Graphics2D) g;
         
@@ -149,6 +190,8 @@ public class Projection extends JPanel{
         graphics2.drawLine(x, y+50, x, y-50);
         
         graphics2.setColor(Color.black);
+        
+        from2Dto3D(fov);
         
         paintAllEdges(graphics2);
        
@@ -197,4 +240,6 @@ public class Projection extends JPanel{
       
       c.init(c.getGraphics());
     }*/
+    
+    
 }
