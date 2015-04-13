@@ -11,14 +11,14 @@ import CG.Vector3;
 
 /**
  *
- * @author jonathaneidelman
+ 
  */
 public class Camera extends Matriz3 {
   
-    public Camera(Punto3 pos, Vector3 V) {
+    public Camera(Punto3 pos, Vector3 V, Punto3 lookat) {
         super();
         
-        Punto3 lookat = new Punto3(50.0,50.0,-22.5);
+        //Punto3 lookat = new Punto3(50.0,50.0,-22.5);
         
         Vector3 N = new Vector3(lookat, pos);
         Vector3 n = N.normalized();

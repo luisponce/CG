@@ -9,9 +9,11 @@ import CG.Matriz2;
 import CG.Matriz3;
 import CG.Punto2;
 import CG.Punto3;
+import CG.Transform.Camera;
 import CG.Transform.Perspective;
 import CG.Transform.Scale;
 import CG.Transform.Translate;
+import CG.Vector3;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -36,6 +38,10 @@ public class Projection extends JPanel{
     public Graphics2D graphics2;
     //private Main principal;
     
+    private  double posX = 50;
+    private  double posY = 50;
+    private  double posZ = -22.5f;
+    
     /** True if the left cursor key is currently pressed */
 	public boolean leftPressed = false;
 	/** True if the right cursor key is currently pressed */
@@ -45,7 +51,28 @@ public class Projection extends JPanel{
 	/** True if the down cursor key is currently pressed */
 	public boolean downPressed = false;
         
+    public boolean update = true;
+    
     public int fov = 25; 
+    
+    //camera
+    public double theta = 0;
+    public double phi = 0;
+    public double R = 50;
+    
+    public Punto3 cameraCoords(){
+        double x1, y1, z1, R1;
+        R1 = R * Math.cos(phi);
+        y1 = R * Math.sin(phi);
+        x1 = R1 * Math.sin(theta);
+        z1 = R1 * Math.cos(theta);
+        
+        x1 += posX;
+        y1 += posY;
+        z1 += posZ;
+        
+        return new Punto3(x1, y1, z1);
+    }
     
     public Projection(){
       setSize(500, 500);
@@ -61,28 +88,18 @@ public class Projection extends JPanel{
     
     public void Repaint(){
         if(leftPressed){
-            for (int i = 0; i < 8; i++) {
-            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
-                    Matriz3.transpose(new Translate(-0.001,0,0))));
-            }
+            theta -= 0.00000001;
+            theta = theta%360;
         } 
         if(rightPressed){
-            for (int i = 0; i < 8; i++) {
-            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
-                    Matriz3.transpose(new Translate(0.001,0,0))));
-            }
+            theta += 0.00000001;
+            theta = theta%360;
         }
         if(upPressed){
-            for (int i = 0; i < 8; i++) {
-            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
-                    Matriz3.transpose(new Translate(0,0.001,0))));
-            }
+            phi += 0.0000001;
         }
         if(downPressed){
-            for (int i = 0; i < 8; i++) {
-            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
-                    Matriz3.transpose(new Translate(0,-0.001,0))));
-            }
+            phi -= 0.0000001;
         }
         
         repaint();
@@ -172,7 +189,7 @@ public class Projection extends JPanel{
         
         addEdge(5, 7);
         
-        
+        addEdge(6, 7);
     }
     
     @Override
@@ -191,10 +208,18 @@ public class Projection extends JPanel{
         
         graphics2.setColor(Color.black);
         
+        if (update) {
+            relativeCamera();
+            update = false;
+        }
+        
+        
         from2Dto3D(fov);
         
         paintAllEdges(graphics2);
        
+        theta = 0;
+        phi = 0;
         
         /*for(int i = 0; i<8; i++) {
             vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
@@ -240,6 +265,25 @@ public class Projection extends JPanel{
       
       c.init(c.getGraphics());
     }*/
+
+    private void relativeCamera() {
+        Punto3 p = cameraCoords();
+        
+        for(int i = 0; i<8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                Matriz3.transpose((new Translate(-p.getX(), -p.getY(), -p.getZ())))));
+        }
+        
+        posX -= p.getX();
+        posY -= p.getY();
+        posZ -= p.getZ();
+        
+        for(int i = 0; i<8; i++) {
+            vertices3D.set(i, Punto3.preTimes(vertices3D.get(i),
+                    Matriz3.transpose((new Camera(
+                            p, new Vector3(0, 1, 0), new Punto3(posX, posY, posZ))))));
+        }
+    }
     
     
 }

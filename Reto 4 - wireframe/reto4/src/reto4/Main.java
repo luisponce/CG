@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author JeanPierre
  */
 public class Main extends JFrame {
     private PnlTransform panelControl;
@@ -89,7 +88,8 @@ public class Main extends JFrame {
 			// if we're waiting for an "any key" typed then we don't 
 			// want to do anything with just a "press"
 			Projection p = Main.getInstance().getPanelProjections();
-                        
+                 
+            p.update = true;
                         
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                             p.leftPressed = true;
@@ -117,6 +117,8 @@ public class Main extends JFrame {
 			// want to do anything with just a "released"
 			Projection p = Main.getInstance().getPanelProjections();
 			
+            p.update = false;
+            
 			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				p.leftPressed = false;
 			}
