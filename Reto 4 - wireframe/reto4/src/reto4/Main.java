@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,7 +60,7 @@ public class Main extends JFrame {
         
         //ventana.panelProjections.init(ventana.getGraphics());
         ventana.setVisible(true);
-        
+        JOptionPane.showMessageDialog(null, "Please use arrows to rotate the camera", "Instructions", JOptionPane.INFORMATION_MESSAGE);
         
         Main.getInstance().startLoop();
         

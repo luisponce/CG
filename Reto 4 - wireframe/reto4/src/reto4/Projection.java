@@ -95,12 +95,12 @@ public class Projection extends JPanel{
             theta += 0.0000001;
             theta = theta%360;
         }
-        if(upPressed){
+        if(downPressed){
             if (phi > -80){
                 phi -= 0.0000001;
             }
         }
-        if(downPressed){
+        if(upPressed){
             if (phi<80){
                 phi += 0.0000001;
             }
