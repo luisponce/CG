@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bezier;
+package reto7;
 
 import CG.Punto2;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ public class Bezier {
     ArrayList<Punto2> paint = new ArrayList<>();
     public Bezier(){
         Punto2 a = new Punto2(20,30);
-        Punto2 b = new Punto2(10,25);
-        Punto2 c = new Punto2(40,50);
-        Punto2 d = new Punto2(50,60);
+        Punto2 b = new Punto2(100,105);
+        Punto2 c = new Punto2(130,-150);
+        Punto2 d = new Punto2(230,160);
         
         p.add(a);
         p.add(b);
@@ -34,24 +34,23 @@ public class Bezier {
         return (fact(n)/(fact(k)*(fact(n - k))));
     }
     
-    public int bez(int n, int k, double u){
-        return (int) (coefficient(n,k)*Math.pow(u, k)*Math.pow(1-u, n-k));
+    public double bez(int n, int k, double u){
+        return (coefficient(n,k)*Math.pow(u, k)*Math.pow((1-u), (n-k)));
     }
     
     public void points(int n, double u){
-        int sumX = 0;
-        int sumY = 0;
+        double sumX = 0;
+        double sumY = 0;
         for(int k = 0; k <= n; ++k){
             sumX += p.get(k).getX()*bez(n,k,u);
             sumY += p.get(k).getY()*bez(n,k,u);
         }
         paint.add(new Punto2(sumX,sumY));
-        
     }
     
     public void curve(){
         
-        for(double u = 0; u <= 1; u += 0.0000001){
+        for(double u = 0; u <= 1; u += 0.0001){
            points(3,u);
         }
     }
