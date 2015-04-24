@@ -33,11 +33,46 @@ public class LocalIlluminationIncomplete {
         Scene myScene = Scene.getInstance();
         myScene.init();
         // The object to be drawn
-        Triangle triangle = new Triangle(
-            new Point3(-200,-200,-500),
-            new Point3(200,-200,-500),
-            new Point3(-200,200,-500));
-        triangle.computeNormal();
+        Triangle triangleABC = new Triangle(
+            new Point3(0,50*3,-500), // -200 -200 -500
+            new Point3(20.71*3,60.355*3,-500), // 200 -200 -500
+            new Point3(0,70.71*3,-500)); // -200 200 -500
+        triangleABC.computeNormal();
+        
+        Triangle triangleADC = new Triangle( //ACD
+            new Point3(0,50*3,-500),
+            new Point3(0,70.71*3,-500),
+            new Point3(-20.71*3,60.355*3,-500));
+        triangleADC.computeNormal();
+        
+        
+        Triangle triangleDAF = new Triangle( //ADF
+            new Point3(0,50*3,-500),
+            new Point3(-20.71*3,60.355*3,-500),
+            new Point3(0,-20.71*3,-500));
+        triangleDAF.computeNormal();
+        
+        Triangle triangleDEF = new Triangle(
+            new Point3(-20.71*3,60.355*3,-500),
+            new Point3(-20.71*3,0,-500),
+            new Point3(0,-20.71*3,-500));
+        triangleDEF.computeNormal();
+        
+        
+        Triangle triangleBAF = new Triangle( //AFC
+            new Point3(20.71*3,60.355*3,-500),
+            new Point3(0,50*3,-500),
+            new Point3(0,-20.71*3,-500));
+        triangleDEF.computeNormal();
+        
+        Triangle triangleBFG = new Triangle( 
+            new Point3(20.71*3,60.355*3,-500),
+            new Point3(0,-20.71*3,-500),
+            new Point3(20.71*3,0,-500));
+        triangleDEF.computeNormal();
+        
+        
+        
 
         Material material = new Material(
             new MyColor(0d, 1d, 1d),
@@ -46,9 +81,28 @@ public class LocalIlluminationIncomplete {
             0.4d,       // Ks
             128          // n
         );
-        Surface triangularSurface = 
-                new Surface(material, triangle);
-        myScene.addSolidSurface(triangularSurface);
+        Surface triangularSurfaceABC = 
+                new Surface(material, triangleABC);
+        myScene.addSolidSurface(triangularSurfaceABC);
+        
+        Surface triangularSurfaceADC = new Surface(material, triangleADC);
+        myScene.addSolidSurface(triangularSurfaceADC);
+        
+        Surface triangularSurfaceDAF = new Surface(material, triangleDAF);
+        myScene.addSolidSurface(triangularSurfaceDAF);
+        
+        Surface triangularSurfaceDEF = new Surface(material, triangleDEF);
+        myScene.addSolidSurface(triangularSurfaceDEF);
+        
+        Surface triangularSurfaceBAF = new Surface(material, triangleBAF);
+        myScene.addSolidSurface(triangularSurfaceBAF);
+        
+        Surface triangularSurfaceBFG = new Surface(material, triangleBFG);
+        myScene.addSolidSurface(triangularSurfaceBFG);
+        
+        
+       
+        
         
         // The sphere to be added
         Sphere sphere = new Sphere(new Point3(50d, 50d, -500d), 100d);
@@ -58,7 +112,7 @@ public class LocalIlluminationIncomplete {
         
         // The light for the scene
         Light light = new Light(
-            new Point3(-200, -200, -300),
+            new Point3(-150, 120, -300),
             new MyColor(0.9d, 0.9d, 0.9d)
         );
         myScene.addLight(light);
