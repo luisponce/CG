@@ -1,9 +1,18 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Master.cs">
     <Files>
       <File FileName="Assets\Master.cs" Line="6" Column="44" />
       <File FileName="Assets\FileReader.cs" Line="5" Column="17" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DrawFigure.cs">
+    <Files>
+      <File FileName="Assets/DrawFigure.cs" Line="14" Column="41" />
+      <File FileName="Assets/FileReader.cs" Line="1" Column="1" />
+      <File FileName="../../../../Downloads/unityCG/Assets/Ejemplo 1 - Materiales/Done/EjemploMateriales_Done.cs" Line="1" Column="1" />
+>>>>>>> e6c27fd441ded3de73618c28b73330d147bb0022
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

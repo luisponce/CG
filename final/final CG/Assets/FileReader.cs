@@ -3,11 +3,14 @@ using System.Collections;
 
 using System.Text;
 using System.IO;  
+using System;
 
 public class FileReader  {
 
 	Vector3[] vertices = new Vector3[4];
+	int[,] geometry = new int[6,3];
 
+	Vector3 point = new Vector3(0,0,0);
 
 	private bool Load(string fileName)
 	{
@@ -37,8 +40,10 @@ public class FileReader  {
 						// In this example, I split it into arguments based on comma
 						// deliniators, then send that array to DoStuff()
 						string[] entries = line.Split(',');
-						if (entries.Length > 0)
-							DoStuff(entries);
+						if (entries.Length > 0){
+							//do stuff
+						}
+
 					}
 				}
 				while (line != null);
