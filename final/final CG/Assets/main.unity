@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1067257055}
   - 114: {fileID: 1067257054}
+  - 114: {fileID: 1067257056}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -410,6 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5446a12eaed4ece940133c11405c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertex:
+  - {x: 0, y: 0, z: 0}
+  - {x: 5, y: 0, z: 0}
+  - {x: 0, y: 0, z: 5}
+  - {x: 5, y: 5, z: 5}
   vertexSphere: {fileID: 172524, guid: d2cce0135cece4dbcaf00144bbda48ba, type: 2}
 --- !u!4 &1067257055
 Transform:
@@ -423,6 +429,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1067257056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1067257053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2338453f43ee644cb895ef6e9594590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p: {fileID: 1378486167}
 --- !u!1 &1300897591
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   red: {fileID: 2100000, guid: de2b3f78949af4a0a8eed0e06f7cc15e, type: 2}
   green: {fileID: 2100000, guid: 321d2399d851144b1ac007433a123f01, type: 2}
+  initialPosition: {x: 0, y: 0, z: 0}
+  vertices: []
 --- !u!1 &1870425711
 GameObject:
   m_ObjectHideFlags: 0

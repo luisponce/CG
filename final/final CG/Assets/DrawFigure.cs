@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DrawFigure : MonoBehaviour {
 
-	Vector3[] vertex = new Vector3[] {new Vector3(0,0,0), new Vector3(5,0,0), new Vector3(0,0,5), new Vector3(5,5,5)};
+	public Vector3[] vertex;
 
 	public GameObject vertexSphere;
 

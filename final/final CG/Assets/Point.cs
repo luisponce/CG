@@ -6,14 +6,11 @@ public class Point : MonoBehaviour {
 	public Material red;
 	public Material green;
 
-	Vector3 initialPosition = new Vector3(2,2,2);
+	public Vector3 initialPosition;
 
-	Vector3[] vertices = new Vector3[]{new Vector3(0,0,0), new Vector3(0,0,5), new Vector3(5,0,0), new Vector3(5,5,5)};
+	public Vector3[] vertices ;
 
-	int[,] sides = new int[4, 3]{{0,2,1},
-								 {0,1,3},
-								 {1,2,3},
-								 {0,3,2}};
+	public int[,] sides;
 
 	float speed = 1f;
 

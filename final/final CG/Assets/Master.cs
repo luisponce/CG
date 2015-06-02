@@ -2,16 +2,21 @@
 using System.Collections;
 
 public class Master : MonoBehaviour {
-	public TextAsset textFile; 
+	TextAsset textFile; 
 	//TextAsset textFile = Resources.Load("Input.txt") as TextAsset;
+
+	public GameObject p;//the point to move
 		
 	void Awake(){
+		textFile = Resources.Load("Input") as TextAsset;
+
 		string text = textFile.text;  //this is the content as string
+
 		string[]lines = text.Split('\n');
 		//string[] entries;
 		Vector3[] vertices = new Vector3[4];
 		int[,] sides = new int[4, 3];
-		Vector3 point;
+		Vector3 point = new Vector3(0,0,0);
 		for (int i = 0; i<lines.Length; ++i) {
 			if(i<=3) {
 				string[] entries = lines[i].Split (' ');
@@ -41,6 +46,9 @@ public class Master : MonoBehaviour {
 				float pointz = float.Parse(pointSz,System.Globalization.CultureInfo.InvariantCulture);
 				point=new Vector3(pointx,pointy,pointz);
 			}
+
+
+
 		}
 		//byte[] byteText = textFile.bytes;  //this is the content as byte array
 		//Debug.Log (text);
@@ -52,7 +60,22 @@ public class Master : MonoBehaviour {
 		string point1z = entries [2];
 		Debug.Log (point1z);*/
 
-		//
+
+		//debug
+		for(int i=0;i<4;i++){
+			string str = "";
+			for(int j = 0; j < 3; j++){
+				str += sides[i,j];
+			}
+			
+			Debug.Log(str);
+		}
+
+		//send info to other entities
+		GetComponent<DrawFigure>().vertex = vertices;
+		p.GetComponent<Point>().initialPosition = point;
+		p.GetComponent<Point>().vertices = vertices;
+		p.GetComponent<Point>().sides = sides;
 	}
 
 	void Start(){
